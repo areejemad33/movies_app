@@ -9,6 +9,19 @@ class ThemeManager {
           colorScheme: const ColorScheme.dark(
             primary: ColorsManager.yellow,
 ),
+appBarTheme: const AppBarTheme(
+
+  backgroundColor: ColorsManager.black,
+
+  elevation: 0,
+
+  centerTitle: true,
+
+  iconTheme: IconThemeData(
+    color: ColorsManager.yellow,
+    size: 24,
+  ),
+),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -72,7 +85,7 @@ class ThemeManager {
       headlineLarge: GoogleFonts.roboto(
         fontSize: 20,
         fontWeight: FontWeight.w400,
-        color: ColorsManager.black28,
+        color: ColorsManager.black,
       ),
 
       // size: 15 - yellow
@@ -92,6 +105,11 @@ class ThemeManager {
       // size: 16 - white
       titleLarge: GoogleFonts.roboto(
         fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: ColorsManager.white,
+      ),
+          titleSmall: GoogleFonts.roboto(
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
