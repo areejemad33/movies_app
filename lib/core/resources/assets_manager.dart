@@ -30,6 +30,8 @@ class AssetsManager {
   static const String phoneIcon = "assets/icons/phone_icon.png";
   static const String eyeOff = "assets/icons/eye_off_icon.png";
 
+    static const String resetPassword = "assets/images/reset_password.png";
+
 
 
 }
