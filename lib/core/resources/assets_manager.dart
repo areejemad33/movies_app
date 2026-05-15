@@ -31,5 +31,16 @@ class AssetsManager {
   static const String eyeOff = "assets/icons/eye_off_icon.png";
 
 
+  static const String onboarding1 = "assets/images/onboarding1.png";
+  static const String onboarding2 = "assets/images/onboarding2.jpg";
+  static const String onboarding3 = "assets/images/onboarding3.jpg";
+  static const String onboarding4 = "assets/images/onboarding4.jpg";
+  static const String onboarding5 = "assets/images/onboarding5.jpg";
+  static const String onboarding6 = "assets/images/onboarding6.jpg";
+
+
+
+
+
 
 }

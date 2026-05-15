@@ -14,6 +14,21 @@ class ColorsManager {
 
   static const Color black28= Color(0xFF282A28);
 
-
   static const Color white = Color(0xFFFFFFFF);
+
+
+  static const Color onboardingGreen = Color(0xFF084250);
+
+
+  static const Color onboardingRed = Color(0xFF85210E);
+
+  static const Color onboardingPurple = Color(0xFF4C2471);
+
+  static const Color onboardingDarkRed = Color(0xFF601321);
+
+  static const Color onboardingGrey = Color(0xFF2A2C30);
+
+  static const Color onboardingBlack = Color(0xFF121312);
+
+
 }

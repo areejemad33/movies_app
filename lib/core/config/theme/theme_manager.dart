@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/core/resources/colors_manager.dart';
 
@@ -113,6 +114,43 @@ appBarTheme: const AppBarTheme(
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
+       // size 36 - white
+       labelLarge:  GoogleFonts.inter(
+         fontSize: 36.sp,
+         fontWeight: FontWeight.w500,
+         color: ColorsManager.white,
     ),
+       //size 24 -white
+       labelMedium: GoogleFonts.inter(
+         fontSize: 24.sp,
+         fontWeight: FontWeight.w700,
+         color: ColorsManager.white,
+       ),
+
+     //size 20 -white
+     labelSmall: GoogleFonts.inter(
+       fontSize: 20.sp,
+       fontWeight: FontWeight.w400,
+       color: ColorsManager.white,
+     ),
+
+       headlineSmall: GoogleFonts.inter(
+         fontSize: 20.sp,
+         fontWeight: FontWeight.w400,
+         color: ColorsManager.white.withOpacity(0.6),
+       ),
+       displayMedium:  GoogleFonts.inter(
+         fontSize: 20.sp,
+         fontWeight: FontWeight.w600,
+         color: ColorsManager.black,
+       ),
+       displayLarge:  GoogleFonts.inter(
+         fontSize: 20.sp,
+         fontWeight: FontWeight.w600,
+         color: ColorsManager.yellow,
+       ),
+
+
+     )
   );
 }
