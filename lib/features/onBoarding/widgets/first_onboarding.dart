@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/features/onBoarding/presentation/Models/onboarding_model.dart';
 import 'package:movies_app/features/onBoarding/widgets/push_button.dart';
 
-import '../../../core/resources/colors_manager.dart';
 
 class FirstOnboarding extends StatelessWidget {
  const FirstOnboarding({super.key, required this.onboardingModel, required this.onNext});

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/features/Home/data/home_remote_data_source.dart';
+import 'package:movies_app/features/Home/data/repositeries/home_repository_impl.dart';
+import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usecase.dart';
+import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart';
 import 'package:movies_app/features/Home/presentation/screens/home.dart';
 import 'package:movies_app/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:movies_app/features/auth/register/presentation/screens/register_screen.dart';
@@ -28,8 +33,19 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const ResetPasswordScreen(),
         );
-          case RoutesManager.home:
-        return MaterialPageRoute(builder: (_) => const Home());
+        case RoutesManager.home:
+  return MaterialPageRoute(
+    builder: (_) => BlocProvider(
+      create: (_) => HomeCubit(
+        GetLatestMoviesUseCase(
+          HomeRepositoryImpl(
+            HomeRemoteDataSource(),
+          ),
+        ),
+      )..getLatestMovies(),
+      child: const Home(),
+    ),
+  );
 
       case RoutesManager.onBoarding:
         return MaterialPageRoute(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
+import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
 import 'package:movies_app/features/Home/presentation/widgets/rating_badge.dart';
 
 class FilmCardList extends StatelessWidget {
-  const FilmCardList({super.key});
+  const FilmCardList({super.key, required List<MovieEntity> movies});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class FilmCardList extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            child: RatingBadge(rating: 7.7)
+            child:   RatingBadge(rating: 7.7),
           );
         },
       ),

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
 import 'package:movies_app/core/resources/colors_manager.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginWithGoogleButton extends StatelessWidget {
   final String text;
