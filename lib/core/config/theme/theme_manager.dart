@@ -99,6 +99,17 @@ class ThemeManager {
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
+       displaySmall: GoogleFonts.roboto(
+         fontSize: 16,
+         fontWeight: FontWeight.w400,
+         color: ColorsManager.black28,
+       ),
+       headlineMedium: GoogleFonts.roboto(
+         fontSize: 14,
+         fontWeight: FontWeight.w900,
+         color: ColorsManager.yellow,
+       ),
+
        // size 36 - white
        labelLarge:  GoogleFonts.inter(
          fontSize: 36.sp,
