@@ -29,6 +29,19 @@ class AssetsManager {
   static const String nameIcon = "assets/icons/name_icon.png";
   static const String phoneIcon = "assets/icons/phone_icon.png";
   static const String eyeOff = "assets/icons/eye_off_icon.png";
+    static const String homeIcon = "assets/icons/home_icon.png";
+  static const String searchIcon = "assets/icons/search_icon.png";
+  static const String exploreIcon = "assets/icons/explore_icon.png";
+  static const String profileIcon = "assets/icons/profile_icon.png";
+
+  static const String availableNow = 'assets/images/available_now_text.png';
+  static const String watchNow = 'assets/images/watch_now_text.png';
+
+  static const String filmImage = 'assets/images/1917Movie.jpg';
+  static const String captainAmericanFilm =
+      'assets/images/captain_american_film.jpg';
+
+  static const String starIcon = 'assets/icons/star_icon.png';
 
     static const String resetPassword = "assets/images/reset_password.png";
 

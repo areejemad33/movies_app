@@ -4,43 +4,34 @@ import 'package:movies_app/core/resources/colors_manager.dart';
 
 class ThemeManager {
   static ThemeData darkTheme = ThemeData(
-      scaffoldBackgroundColor: ColorsManager.black,
-          primaryColor: ColorsManager.yellow,
-          colorScheme: const ColorScheme.dark(
-            primary: ColorsManager.yellow,
-),
-appBarTheme: const AppBarTheme(
+    scaffoldBackgroundColor: ColorsManager.black,
+    primaryColor: ColorsManager.yellow,
+    colorScheme: const ColorScheme.dark(primary: ColorsManager.yellow),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: ColorsManager.black,
 
-  backgroundColor: ColorsManager.black,
+      elevation: 0,
 
-  elevation: 0,
+      centerTitle: true,
 
-  centerTitle: true,
-
-  iconTheme: IconThemeData(
-    color: ColorsManager.yellow,
-    size: 24,
-  ),
-),
+      iconTheme: IconThemeData(color: ColorsManager.yellow, size: 24),
+    ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorsManager.yellow,
         foregroundColor: ColorsManager.black28,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.black28,
       selectedItemColor: ColorsManager.yellow,
       unselectedItemColor: ColorsManager.white,
       type: BottomNavigationBarType.fixed,
     ),
 
-
-        inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: ColorsManager.black28,
 
@@ -51,22 +42,16 @@ appBarTheme: const AppBarTheme(
 
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
-        borderSide: const BorderSide(
-          color: ColorsManager.yellow,
-        ),
+        borderSide: const BorderSide(color: ColorsManager.yellow),
       ),
 
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
-        borderSide: const BorderSide(
-          color: ColorsManager.red,
-        ),
+        borderSide: const BorderSide(color: ColorsManager.red),
       ),
     ),
 
-
-     textTheme: TextTheme(
-
+    textTheme: TextTheme(
       // size: 16 - white
       bodyLarge: GoogleFonts.roboto(
         fontSize: 16,
@@ -104,11 +89,11 @@ appBarTheme: const AppBarTheme(
 
       // size: 16 - white
       titleLarge: GoogleFonts.roboto(
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
-          titleSmall: GoogleFonts.roboto(
+      titleSmall: GoogleFonts.roboto(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
