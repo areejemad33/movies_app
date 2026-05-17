@@ -3,13 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/config/theme/theme_manager.dart';
 import 'package:movies_app/core/routes/routes_generator.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final seenOnboarding = prefs.getBool('seen_onboarding') ?? false;
+  runApp( MyApp(seenOnboarding: seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.seenOnboarding});
+  final bool seenOnboarding;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class MyApp extends StatelessWidget {
       
         theme: ThemeManager.darkTheme,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: RoutesManager.login,
+        initialRoute: seenOnboarding
+            ? RoutesManager.login
+            : RoutesManager.onBoarding,
       ),
     );
   }
