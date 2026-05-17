@@ -78,50 +78,55 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 void buildAvatarSelector(BuildContext context) {
     String? selectedAvatar;
-    showModalBottomSheet(context: context, builder: (context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context, builder: (context) {
       return BlocProvider(
         create: (context) => AvatarCubit(),
         child:  BlocBuilder<AvatarCubit, String?>(
           builder: (context, selectedAvatar){
-          return Container(
-            decoration: BoxDecoration(
-                color: ColorsManager.black28,
-                borderRadius: BorderRadius.circular(24)
-            ),
-             child: Padding(
-               padding:  REdgeInsets.all(19),
-               child: GridView.builder(
-           shrinkWrap: true,
-           itemCount: AssetsManager.avatars.length,
-           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-             crossAxisCount: 3,
-             crossAxisSpacing: 12,
-             mainAxisSpacing: 12,
-           ),
-           itemBuilder: (context, index) {
-             final bool isSelected = selectedAvatar == AssetsManager.avatars[index];
-             return InkWell(
-               onTap: (){
-                 context.read<AvatarCubit>().selectAvatar(AssetsManager.avatars[index]);
-               },
-               child: Container(
-                 decoration: BoxDecoration(
-                   border: Border.all(
-               color: ColorsManager.yellow,
-                     width: 1,
-                   ),
-                   borderRadius: BorderRadius.circular(20),
-          
-                   color: isSelected ? ColorsManager.yellow.withOpacity(.56) : ColorsManager.black28,
-                 ),
-                 child: Image.asset(
-                   AssetsManager.avatars[index],
-                 ),
-               ),
-             );
-           },
-               ),
+          return Padding(
+            padding:REdgeInsets.symmetric(vertical: 17.h, horizontal: 16.w),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: ColorsManager.black28,
+                  borderRadius: BorderRadius.circular(24)
+              ),
+               child: Padding(
+                 padding:  REdgeInsets.all(19),
+                 child: GridView.builder(
+             shrinkWrap: true,
+             itemCount: AssetsManager.avatars.length,
+             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+               crossAxisCount: 3,
+               crossAxisSpacing: 12,
+               mainAxisSpacing: 12,
              ),
+             itemBuilder: (context, index) {
+               final bool isSelected = selectedAvatar == AssetsManager.avatars[index];
+               return InkWell(
+                 onTap: (){
+                   context.read<AvatarCubit>().selectAvatar(AssetsManager.avatars[index]);
+                 },
+                 child: Container(
+                   decoration: BoxDecoration(
+                     border: Border.all(
+                 color: ColorsManager.yellow,
+                       width: 1,
+                     ),
+                     borderRadius: BorderRadius.circular(20),
+
+                     color: isSelected ? ColorsManager.yellow.withOpacity(.56) : ColorsManager.black28,
+                   ),
+                   child: Image.asset(
+                     AssetsManager.avatars[index],
+                   ),
+                 ),
+               );
+             },
+                 ),
+               ),
+            ),
           );
           },
         ),
