@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class ApiManager {
-  static final Dio dio = Dio(
+  final Dio dio = Dio(
     BaseOptions(
       baseUrl: "https://movies-api.accel.li/api/v2/",
     ),

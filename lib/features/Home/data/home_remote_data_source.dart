@@ -1,11 +1,15 @@
+import 'package:injectable/injectable.dart';
 import 'package:movies_app/core/api/api_manager.dart';
 import 'package:movies_app/features/Home/data/models/movie_model.dart';
 
+@injectable
 class HomeRemoteDataSource {
+    final ApiManager apiManager;
+      HomeRemoteDataSource(this.apiManager);
 
   Future<List<MovieModel>> getLatestMovies() async {
 
-    final response = await ApiManager.dio.get(
+    final response = await apiManager.dio.get(
       "list_movies.json",
       queryParameters: {
         "sort_by": "date_added",

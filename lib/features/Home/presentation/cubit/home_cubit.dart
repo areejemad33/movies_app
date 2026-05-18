@@ -1,11 +1,13 @@
 
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'home_state.dart';
 
 import '../../domain/use_cases/get_latest_movies_usecase.dart';
 
-class HomeCubit extends Cubit<HomeStates> {
+@injectable
+class HomeCubit extends Cubit<HomeStates>{
   final GetLatestMoviesUseCase getLatestMoviesUseCase;
 
   HomeCubit(this.getLatestMoviesUseCase)
