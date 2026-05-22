@@ -15,26 +15,24 @@ class MoviePosterCard extends StatelessWidget {
     return Container(
       width: 234.w,
       height: 351.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.r)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.r),
         child: Stack(
           children: [
-AnimatedSwitcher(
-  duration: const Duration(milliseconds: 400),
-  child: Container(
-    key: ValueKey(movie.image),
-    height: 645.h,
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: CachedNetworkImageProvider(movie.image),
-        fit: BoxFit.cover,
-      ),
-    ),
-  ),
-),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 400),
+              child: Container(
+                key: ValueKey(movie.image),
+                height: 645.h,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: CachedNetworkImageProvider(movie.image),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
 
             RatingBadge(rating: movie.rating),
           ],

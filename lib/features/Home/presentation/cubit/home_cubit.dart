@@ -1,39 +1,83 @@
-
-
+import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usecase.dart';
 import 'home_state.dart';
-
-import '../../domain/use_cases/get_latest_movies_usecase.dart';
+import '../../domain/use_cases/get_random_movies_use_case.dart';
 
 @injectable
-class HomeCubit extends Cubit<HomeStates>{
+class HomeCubit extends Cubit<HomeState> {
   final GetLatestMoviesUseCase getLatestMoviesUseCase;
+  final GetMoviesByGenreUseCase getRandomMoviesUseCase;
 
-  HomeCubit(this.getLatestMoviesUseCase)
-      : super(HomeLoading());
+  HomeCubit(this.getLatestMoviesUseCase, this.getRandomMoviesUseCase)
+    : super(const HomeState());
 
-  Future<void> getLatestMovies() async {
+    String getRandomGenre() {
+  const genres = [
+    "Action",
+    "Comedy",
+    "Horror",
+    "Drama",
+    "Adventure",
+    "Sci-Fi",
+    "Fantasy",
+    "Thriller",
+    "Crime",
+    "Animation",
+    "Romance",
+  ];
+
+  return genres[Random().nextInt(genres.length)];
+}
+
+  Future<void> loadHome() async {
+    emit(state.copyWith(isLoading: true, error: null));
+
     try {
-      final movies = await getLatestMoviesUseCase();
+      final latestMovies = await getLatestMoviesUseCase();
 
-      emit(HomeSuccess(
-        movies: movies,
-        currentIndex: 0,
-      ));
+      final randomGenre = getRandomGenre();
+
+      final genreMovies = await getRandomMoviesUseCase(randomGenre);
+
+      emit(
+        state.copyWith(
+          latestMovies: latestMovies,
+          genreMovies: genreMovies,
+          selectedGenre: randomGenre,
+          currentIndex: 0,
+          isLoading: false,
+        ),
+      );
     } catch (e) {
-      emit(HomeError(e.toString()));
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
 
   void changeIndex(int index) {
-    final currentState = state;
+    emit(state.copyWith(currentIndex: index));
+  }
 
-    if (currentState is HomeSuccess) {
-      emit(HomeSuccess(
-        movies: currentState.movies,
-        currentIndex: index,
-      ));
+  Future<void> changeGenre(String genre) async {
+    emit(state.copyWith(isLoading: true, selectedGenre: genre));
+
+    try {
+      final movies = await getRandomMoviesUseCase(genre);
+
+      emit(state.copyWith(genreMovies: movies, isLoading: false));
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, error: e.toString()));
     }
   }
+void changeBottomNav(int index) async {
+
+  emit(state.copyWith(
+    bottomNavIndex: index,
+  ));
+
+  if (index == 0) {
+    await changeGenre(getRandomGenre());
+  }
+}
 }

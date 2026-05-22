@@ -30,7 +30,9 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: 24.h),
             AppButton(
   text: "Create Account",
-  onPressed: () {},
+  onPressed: () {
+    Navigator.pushNamed(context, "/home");
+  },
 ),
               SizedBox(height: 18.h),
               AlreadyHaveAccount(),

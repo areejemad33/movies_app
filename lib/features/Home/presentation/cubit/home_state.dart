@@ -1,34 +1,53 @@
-
-
-
 import 'package:equatable/equatable.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
 
-abstract class HomeStates extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
-
-class HomeLoading extends HomeStates {}
-
-class HomeError extends HomeStates {
-  final String message;
-
-  HomeError(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
-
-class HomeSuccess extends HomeStates {
-  final List<MovieEntity> movies;
+class HomeState extends Equatable {
+  final List<MovieEntity> latestMovies;
+  final List<MovieEntity> genreMovies;
+  final String selectedGenre;
   final int currentIndex;
+  final bool isLoading;
+  final String? error;
+  final int bottomNavIndex;
 
-   HomeSuccess({
-    required this.movies,
-    required this.currentIndex,
+  const HomeState({
+    this.latestMovies = const [],
+    this.genreMovies = const [],
+    this.selectedGenre = "Action",
+    this.currentIndex = 0,
+    this.isLoading = false,
+    this.bottomNavIndex = 0,
+    this.error,
   });
 
+  HomeState copyWith({
+    List<MovieEntity>? latestMovies,
+    List<MovieEntity>? genreMovies,
+    String? selectedGenre,
+    int? currentIndex,
+    bool? isLoading,
+    String? error,
+    int? bottomNavIndex,
+  }) {
+    return HomeState(
+      latestMovies: latestMovies ?? this.latestMovies,
+      genreMovies: genreMovies ?? this.genreMovies,
+      selectedGenre: selectedGenre ?? this.selectedGenre,
+      currentIndex: currentIndex ?? this.currentIndex,
+      isLoading: isLoading ?? this.isLoading,
+      error: error,
+      bottomNavIndex: bottomNavIndex ?? this.bottomNavIndex,
+    );
+  }
+
   @override
-  List<Object?> get props => [movies, currentIndex];
+  List<Object?> get props => [
+    latestMovies,
+    genreMovies,
+    selectedGenre,
+    currentIndex,
+    isLoading,
+    error,
+    bottomNavIndex,
+  ];
 }

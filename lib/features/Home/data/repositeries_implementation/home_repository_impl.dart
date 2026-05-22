@@ -14,4 +14,9 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<List<MovieEntity>> getLatestMovies() {
     return remoteDataSource.getLatestMovies();
   }
+
+  @override
+  Future<List<MovieEntity>> getMoviesByGenre(String genre) {
+    return remoteDataSource.getMoviesByGenre(genre);
+  }
 }
