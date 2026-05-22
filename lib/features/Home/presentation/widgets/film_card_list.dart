@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
@@ -25,7 +26,7 @@ class FilmCardList extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
               image: DecorationImage(
-                image: NetworkImage(movie.image),
+                image: CachedNetworkImageProvider(movie.image),
                 fit: BoxFit.cover,
               ),
             ),
