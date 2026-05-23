@@ -26,32 +26,6 @@ class RegisterScreen extends StatelessWidget {
 class _RegisterView extends StatefulWidget {
   const _RegisterView();
 
-<<<<<<< HEAD
-      body: SingleChildScrollView(
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 8.w),
-          child: Column(
-            children: [
-            
-              AvatarSelector(),
-                  SizedBox(height: 10.h),
-                Text("Avatar", style: Theme.of(context).textTheme.bodyLarge),
-        
-              SizedBox(height: 12.h),
-              RegisterForm(),
-              SizedBox(height: 24.h),
-            AppButton(
-  text: "Create Account",
-  onPressed: () {
-    Navigator.pushNamed(context, "/home");
-  },
-),
-              SizedBox(height: 18.h),
-              AlreadyHaveAccount(),
-              SizedBox(height: 18.h),
-              AppLanguageSwitch(),
-            ],
-=======
   @override
   State<_RegisterView> createState() => _RegisterViewState();
 }
@@ -94,7 +68,6 @@ class _RegisterViewState extends State<_RegisterView> {
         return Scaffold(
           appBar: AppBar(
             title: Text("Register", style: Theme.of(context).textTheme.titleMedium),
->>>>>>> feature_auth_logic
           ),
           body: SingleChildScrollView(
             child: Padding(

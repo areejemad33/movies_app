@@ -1,16 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/config/theme/theme_manager.dart';
 import 'package:movies_app/core/di/dependency_injection.dart';
 import 'package:movies_app/core/routes/routes_generator.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
+import 'package:movies_app/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
+void main() async {
 
-void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
     configureDependencies();
   final prefs = await SharedPreferences.getInstance();
   final seenOnboarding = prefs.getBool('seen_onboarding') ?? false;
@@ -33,7 +37,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeManager.darkTheme,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: seenOnboarding
-            ? RoutesManager.register
+            ? RoutesManager.login
 
       : RoutesManager.onBoarding,
       ),

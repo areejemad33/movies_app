@@ -88,26 +88,17 @@ class ThemeManager {
         color: ColorsManager.yellow,
       ),
 
-      // size: 16 - white
-      titleLarge: GoogleFonts.roboto(
-<<<<<<< HEAD
-        fontSize: 20,
-        fontWeight: FontWeight.w400,
-        color: ColorsManager.white,
-      ),
-      titleSmall: GoogleFonts.roboto(
-        fontSize: 14,
-=======
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w400,
-        color: ColorsManager.white,
-      ),
-          titleSmall: GoogleFonts.roboto(
-        fontSize: 14.sp,
->>>>>>> feature_auth_logic
-        fontWeight: FontWeight.w400,
-        color: ColorsManager.white,
-      ),
+    titleLarge: GoogleFonts.roboto(
+  fontSize: 20.sp,
+  fontWeight: FontWeight.w400,
+  color: ColorsManager.white,
+),
+
+titleSmall: GoogleFonts.roboto(
+  fontSize: 14.sp,
+  fontWeight: FontWeight.w400,
+  color: ColorsManager.white,
+),
        displaySmall: GoogleFonts.roboto(
          fontSize: 16.sp,
          fontWeight: FontWeight.w400,

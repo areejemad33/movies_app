@@ -45,25 +45,30 @@ class _LoginViewState extends State<_LoginView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {
-        if (state is LoginSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Successfully Logged In!'),
-              backgroundColor: Colors.green,
-            ),
-          );
-         //Navigator.pushReplacementNamed(context, RoutesManager.home);
-        }
-        if (state is LoginError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      },
+    listener: (context, state) {
+  if (state is LoginSuccess) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Successfully Logged In!'),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    Navigator.pushReplacementNamed(
+      context,
+      RoutesManager.home,
+    );
+  }
+
+  if (state is LoginError) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(state.message),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+},
       builder: (context, state) {
         return Form(
           key: _formKey,

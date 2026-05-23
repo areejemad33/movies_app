@@ -21,7 +21,8 @@ class ResetPasswordScreen extends StatelessWidget {
             AppTextFormField(
         hintText: "Email",
         prefixIcon: Image.asset(AssetsManager.emailIcon),
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.emailAddress, 
+        validator: (String? p) {},
       ),
          SizedBox(height: 24,),
                   AppButton(
