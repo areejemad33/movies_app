@@ -9,13 +9,13 @@ class RegisterCubit extends Cubit<RegisterState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void>  register({
+  Future<void> register({
     required String name,
     required String email,
     required String password,
     required String confirmPassword,
     required String phone,
-    required String avatar,
+    required String avatarId,
   }) async {
     try {
       emit(RegisterLoading());
@@ -34,19 +34,18 @@ class RegisterCubit extends Cubit<RegisterState> {
         'name': name,
         'email': email,
         'phone': phone,
-        'avatar': avatar,
+        'avatarId': avatarId,
         'createdAt': FieldValue.serverTimestamp(),
       });
 
       await userCredential.user?.updateDisplayName(name);
 
       emit(RegisterSuccess());
+
     } on FirebaseAuthException catch (e) {
-      print('Firebase Error Code: ${e.code}');
       switch (e.code) {
         case 'email-already-in-use':
-          emit(RegisterError('Email already in use'),
-          );
+          emit(RegisterError('Email already in use'));
           break;
         case 'invalid-email':
           emit(RegisterError('Invalid email address'));
@@ -58,6 +57,8 @@ class RegisterCubit extends Cubit<RegisterState> {
           emit(RegisterError(e.message ?? 'Something went wrong'));
       }
     } catch (e) {
+      print('General Error: $e');
       emit(RegisterError('Something went wrong'));
     }
-  }}
+  }
+}

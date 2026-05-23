@@ -32,7 +32,7 @@ class _RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<_RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _selectedAvatar = AssetsManager.avatars[0];
+  String _selectedAvatarId = '0';
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -77,8 +77,8 @@ class _RegisterViewState extends State<_RegisterView> {
                 child: Column(
                   children: [
                     AvatarSelector(
-                      onAvatarSelected: (avatar) {
-                        _selectedAvatar = avatar;
+                      onAvatarSelected: (avatarId) {
+                        _selectedAvatarId = avatarId;
                       },
                     ),
                     SizedBox(height: 10.h),
@@ -106,7 +106,7 @@ class _RegisterViewState extends State<_RegisterView> {
                             password: _passwordController.text,
                             confirmPassword: _confirmPasswordController.text,
                             phone: _phoneController.text.trim(),
-                            avatar: _selectedAvatar,
+                            avatarId: _selectedAvatarId,
                           );
                         }
                       },

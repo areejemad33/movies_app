@@ -70,7 +70,7 @@ class _AvatarSelectorState
           setState(() {
 
             selectedIndex = index;
-            widget.onAvatarSelected(AssetsManager.avatars[index]);
+          widget.onAvatarSelected(index.toString());
 
           });
         },

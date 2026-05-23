@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies_app/core/config/theme/theme_manager.dart';
 import 'package:movies_app/core/routes/routes_generator.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
@@ -10,7 +11,7 @@ import 'firebase_options.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await GoogleSignIn.instance.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
