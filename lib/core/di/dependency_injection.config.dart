@@ -22,6 +22,8 @@ import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usec
     as _i747;
 import 'package:movies_app/features/Home/domain/use_cases/get_random_movies_use_case.dart'
     as _i391;
+import 'package:movies_app/features/Home/presentation/cubit/browse_cubit.dart'
+    as _i779;
 import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart'
     as _i224;
 
@@ -44,6 +46,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i391.GetMoviesByGenreUseCase>(
       () => _i391.GetMoviesByGenreUseCase(gh<_i104.HomeRepository>()),
+    );
+    gh.factory<_i779.BrowseCubit>(
+      () => _i779.BrowseCubit(gh<_i391.GetMoviesByGenreUseCase>()),
     );
     gh.factory<_i224.HomeCubit>(
       () => _i224.HomeCubit(

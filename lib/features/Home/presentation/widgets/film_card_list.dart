@@ -15,6 +15,7 @@ class FilmCardList extends StatelessWidget {
       height: 260.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
+      
         itemCount: movies.length,
         itemBuilder: (context, index) {
           final movie = movies[index];

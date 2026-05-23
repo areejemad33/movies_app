@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movies_app/core/constants/categories.dart';
 import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usecase.dart';
 import 'home_state.dart';
 import '../../domain/use_cases/get_random_movies_use_case.dart';
@@ -14,21 +15,9 @@ class HomeCubit extends Cubit<HomeState> {
     : super(const HomeState());
 
     String getRandomGenre() {
-  const genres = [
-    "Action",
-    "Comedy",
-    "Horror",
-    "Drama",
-    "Adventure",
-    "Sci-Fi",
-    "Fantasy",
-    "Thriller",
-    "Crime",
-    "Animation",
-    "Romance",
-  ];
 
-  return genres[Random().nextInt(genres.length)];
+
+  return categories[Random().nextInt(categories.length)];
 }
 
   Future<void> loadHome() async {

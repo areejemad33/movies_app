@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/core/di/dependency_injection.dart';
+import 'package:movies_app/features/Home/presentation/cubit/browse_cubit.dart';
 import 'package:movies_app/features/Home/presentation/cubit/home_state.dart';
 import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart';
 import 'package:movies_app/features/Home/presentation/screens/tabs/browse_tab.dart';
@@ -15,7 +17,19 @@ class HomeScreen extends StatelessWidget {
   final List<Widget> tabs = [
     const HomeTab(),
     const SearchTab(),
-    const BrowseTab(),
+  BlocProvider(
+  create: (_) {
+    final cubit = getIt<BrowseCubit>();
+
+    cubit.getMoviesByGenre(
+      cubit.selectedCategory,
+    );
+
+    return cubit;
+  },
+
+  child: const BrowseTab(),
+),
     const ProfileTab(),
   ];
 
