@@ -55,60 +55,71 @@ class ThemeManager {
     textTheme: TextTheme(
       // size: 16 - white
       bodyLarge: GoogleFonts.roboto(
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
 
       // size: 14 - yellow
       bodyMedium: GoogleFonts.roboto(
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.yellow,
       ),
 
       // size: 20 - black28
       headlineLarge: GoogleFonts.roboto(
-        fontSize: 20,
+        fontSize: 20.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.black,
       ),
 
       // size: 15 - yellow
       bodySmall: GoogleFonts.roboto(
-        fontSize: 15,
+        fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.yellow,
       ),
 
       // size: 16 - yellow
       titleMedium: GoogleFonts.roboto(
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: ColorsManager.yellow,
       ),
 
       // size: 16 - white
       titleLarge: GoogleFonts.roboto(
+<<<<<<< HEAD
         fontSize: 20,
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
       titleSmall: GoogleFonts.roboto(
         fontSize: 14,
+=======
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: ColorsManager.white,
+      ),
+          titleSmall: GoogleFonts.roboto(
+        fontSize: 14.sp,
+>>>>>>> feature_auth_logic
         fontWeight: FontWeight.w400,
         color: ColorsManager.white,
       ),
        displaySmall: GoogleFonts.roboto(
-         fontSize: 16,
+         fontSize: 16.sp,
          fontWeight: FontWeight.w400,
          color: ColorsManager.black28,
        ),
+
        headlineMedium: GoogleFonts.roboto(
-         fontSize: 14,
+         fontSize: 14.sp,
          fontWeight: FontWeight.w900,
          color: ColorsManager.yellow,
        ),
+
 
        // size 36 - white
        labelLarge:  GoogleFonts.inter(

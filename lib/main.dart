@@ -5,10 +5,11 @@ import 'package:movies_app/core/di/dependency_injection.dart';
 import 'package:movies_app/core/routes/routes_generator.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 
 void main()async {
-
   WidgetsFlutterBinding.ensureInitialized();
     configureDependencies();
   final prefs = await SharedPreferences.getInstance();
@@ -32,8 +33,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeManager.darkTheme,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: seenOnboarding
-            ? RoutesManager.login
-            : RoutesManager.onBoarding,
+            ? RoutesManager.register
+
+      : RoutesManager.onBoarding,
       ),
     );
   }

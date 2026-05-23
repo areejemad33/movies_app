@@ -29,6 +29,7 @@ class AssetsManager {
   static const String nameIcon = "assets/icons/name_icon.png";
   static const String phoneIcon = "assets/icons/phone_icon.png";
   static const String eyeOff = "assets/icons/eye_off_icon.png";
+<<<<<<< HEAD
     static const String homeIcon = "assets/icons/home_icon.png";
   static const String searchIcon = "assets/icons/search_icon.png";
   static const String exploreIcon = "assets/icons/explore_icon.png";
@@ -44,6 +45,11 @@ class AssetsManager {
 
   static const String starIcon = 'assets/icons/star_icon.png';
   
+=======
+  static const String googleIcon = "assets/icons/🦆 icon _google_.svg";
+  static const String profileIcon = "assets/icons/profile_icon.png";
+
+>>>>>>> feature_auth_logic
 
   static const String logo = "assets/images/logo.png";
     static const String resetPassword = "assets/images/reset_password.png";

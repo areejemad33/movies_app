@@ -30,5 +30,6 @@ class ColorsManager {
 
   static const Color onboardingBlack = Color(0xFF121312);
 
+  static const Color bottomSheetBg = Color(0xFF1E1E1E);
 
 }
