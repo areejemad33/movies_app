@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
 
 class AvatarSelector extends StatefulWidget {
-  const AvatarSelector({super.key});
+  const AvatarSelector({super.key, required this.onAvatarSelected});
+  final Function(String avatar) onAvatarSelected;
 
   @override
   State<AvatarSelector> createState() =>
@@ -69,6 +70,7 @@ class _AvatarSelectorState
           setState(() {
 
             selectedIndex = index;
+            widget.onAvatarSelected(AssetsManager.avatars[index]);
 
           });
         },

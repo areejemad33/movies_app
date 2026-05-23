@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTextFormField extends StatelessWidget {
-
+  final String? Function(String?)? validator;
   final String hintText;
 
   final Widget? prefixIcon;
@@ -16,7 +16,6 @@ class AppTextFormField extends StatelessWidget {
 
   const AppTextFormField({
     super.key,
-
     required this.hintText,
 
     this.prefixIcon,
@@ -27,12 +26,14 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
 
     this.controller,
+    required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
 
     return TextFormField(
+      validator: validator,
 
       controller: controller,
 
@@ -49,6 +50,8 @@ class AppTextFormField extends StatelessWidget {
 
         prefixIcon: prefixIcon,
          suffixIcon: suffixIcon,
+
+
       ),
     );
   }

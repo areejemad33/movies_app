@@ -38,6 +38,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       child: Image.asset(AssetsManager.avatar2,)),
                   SizedBox(height: 35.h),
                   AppTextFormField(
+                    validator: (value){},
                     controller:
                     nameController = TextEditingController(text: 'John Safwat'),
                     prefixIcon: Image.asset(AssetsManager.profileIcon),
@@ -45,6 +46,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                   SizedBox(height: 19.28.h),
                   AppTextFormField(
+                    validator: (value){},
                     controller: phoneController =
                         TextEditingController(text: '01200000000'),
                     hintText: '',
