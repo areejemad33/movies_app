@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/features/Home/data/home_remote_data_source.dart';
+import 'package:movies_app/features/Home/data/data_sources/home_remote_data_source.dart';
 import 'package:movies_app/features/Home/domain/repositiries/home_repositery.dart';
 
 import '../../domain/entities/movie_entity.dart';
@@ -15,8 +15,9 @@ class HomeRepositoryImpl implements HomeRepository {
     return remoteDataSource.getLatestMovies();
   }
 
-  @override
-  Future<List<MovieEntity>> getMoviesByGenre(String genre) {
-    return remoteDataSource.getMoviesByGenre(genre);
-  }
+  
+@override
+Future<List<MovieEntity>> getMoviesByGenre(String genre, {int page = 1}) {
+  return remoteDataSource.getMoviesByGenre(genre, page: page);
+}
 }

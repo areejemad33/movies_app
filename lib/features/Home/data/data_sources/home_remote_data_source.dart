@@ -19,14 +19,22 @@ class HomeRemoteDataSource {
     return movies.map((e) => MovieModel.fromJson(e)).toList();
   }
 
-  Future<List<MovieModel>> getMoviesByGenre(String genre) async {
-    final response = await apiManager.dio.get(
-      "list_movies.json",
-      queryParameters: {"genre": genre, "sort_by": "rating"},
-    );
+Future<List<MovieModel>> getMoviesByGenre(
+  String genre, {
+  int page = 1,
+}) async {
+  final response = await apiManager.dio.get(
+    "list_movies.json",
+    queryParameters: {
+      "genre": genre,
+      "sort_by": "rating",
+      "limit": 20,
+      "page": page,
+    },
+  );
 
-    List movies = response.data['data']['movies'];
+  List movies = response.data['data']['movies'] ?? [];
 
-    return movies.map((e) => MovieModel.fromJson(e)).toList();
-  }
+  return movies.map((e) => MovieModel.fromJson(e)).toList();
+}
 }
