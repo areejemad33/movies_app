@@ -5,8 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart';
-import 'package:movies_app/features/Home/presentation/cubit/home_state.dart';
+import 'package:movies_app/features/Home/presentation/cubit/home/home_cubit.dart';
+import 'package:movies_app/features/Home/presentation/cubit/home/home_state.dart';
 import 'package:movies_app/features/Home/presentation/widgets/film_card_list.dart';
 import 'package:movies_app/features/Home/presentation/widgets/films_heading.dart';
 import 'package:movies_app/features/Home/presentation/widgets/films_main_card.dart';

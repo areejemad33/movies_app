@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
 import 'package:movies_app/features/Home/presentation/widgets/rating_badge.dart';
 
@@ -15,24 +15,28 @@ class FilmCardList extends StatelessWidget {
       height: 260.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-      
         itemCount: movies.length,
         itemBuilder: (context, index) {
           final movie = movies[index];
 
-          return Container(
-            width: 146.w,
-            margin: const EdgeInsets.only(left: 16),
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, RoutesManager.movieDetails);
+            },
+            child: Container(
+              width: 146,
+              margin: const EdgeInsets.only(left: 16),
 
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(movie.image),
-                fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.r),
+                image: DecorationImage(
+                  image: NetworkImage(movie.image),
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
 
-            child: RatingBadge(rating: movie.rating),
+              child: RatingBadge(rating: movie.rating),
+            ),
           );
         },
       ),
