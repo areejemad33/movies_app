@@ -28,12 +28,26 @@ class MovieCard extends StatelessWidget {
             borderRadius:
                 BorderRadius.circular(16.r),
 
-            child: CachedNetworkImage(
+            child:CachedNetworkImage(
+  imageUrl: movie.image,
+  fit: BoxFit.cover,
 
-              imageUrl: movie.image,
+  placeholder: (context, url) => Container(
+    color: Colors.grey.shade300,
+    child: const Center(
+      child: CircularProgressIndicator(strokeWidth: 2),
+    ),
+  ),
 
-              fit: BoxFit.cover,
-            ),
+  errorWidget: (context, url, error) => Container(
+    color: Colors.grey.shade300,
+    child: const Icon(
+      Icons.broken_image_outlined,
+      size: 40,
+      color: Colors.grey,
+    ),
+  ),
+)
           ),
         ),
 

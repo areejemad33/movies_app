@@ -18,33 +18,31 @@ class SearchTextField extends StatefulWidget {
 class _SearchTextFieldState extends State<SearchTextField> {
   Timer? debounce;
 
-  @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<SearchCubit>();
+@override
+Widget build(BuildContext context) {
+  final cubit = context.read<SearchCubit>();
 
-    return SizedBox(
+  return Padding(
+    padding: EdgeInsets.only(top: 21 ,left: 8 , right: 8 ),
+    child: SizedBox(
       height: 56.h,
-
       child: TextField(
         controller: cubit.searchController,
-
         onChanged: (value) {
           if (debounce?.isActive ?? false) {
             debounce!.cancel();
           }
 
-          debounce = Timer(const Duration(milliseconds: 500), () {
-            cubit.searchMovies(value);
-          });
+          debounce = Timer(
+            const Duration(milliseconds: 500),
+            () => cubit.searchMovies(value),
+          );
         },
-
         style: Theme.of(context).textTheme.bodyLarge,
-
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 18.h ),
+          contentPadding: EdgeInsets.symmetric(vertical: 18.h),
 
           hintText: "Search",
-
           hintStyle: Theme.of(context).textTheme.bodyLarge,
 
           prefixIcon: Padding(
@@ -57,15 +55,22 @@ class _SearchTextFieldState extends State<SearchTextField> {
 
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
-            borderSide: BorderSide(color: ColorsManager.black, width: 1.w),
+            borderSide: BorderSide(
+              color: ColorsManager.black,
+              width: 1.w,
+            ),
           ),
 
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.r),
-            borderSide: BorderSide(color: ColorsManager.black, width: 1.w),
+            borderSide: BorderSide(
+              color: ColorsManager.black,
+              width: 1.w,
+            ),
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

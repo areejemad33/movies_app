@@ -6,8 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/constants/categories.dart';
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_cubit.dart';
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_state.dart';
+import 'package:movies_app/features/Home/presentation/widgets/browse_categories.dart';
 import 'package:movies_app/features/Home/presentation/widgets/category_item.dart';
 import 'package:movies_app/features/Home/presentation/widgets/movie_card.dart';
+import 'package:movies_app/features/Home/presentation/widgets/movie_page_grid.dart';
 
 class BrowseTab extends StatefulWidget {
   const BrowseTab({super.key});
@@ -51,75 +53,42 @@ class _BrowseTabState extends State<BrowseTab> {
           SizedBox(height: 16.h),
 
           /// Categories
-          SizedBox(
-            height: 48.h,
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                final category = categories[index];
-
-                return CategoryItem(
-                  title: category,
-                  isSelected: cubit.selectedCategory == category,
-                  onTap: () {
-                    context
-                        .read<BrowseCubit>()
-                        .getMoviesByGenre(category);
-                  },
-                );
-              },
-              separatorBuilder: (_, __) => SizedBox(width: 8.w),
-              itemCount: categories.length,
-            ),
-          ),
-
+        
+    CategoriesRow(
+      selected: cubit.selectedCategory,
+      onTap: (category) {
+        context.read<BrowseCubit>().getMoviesByGenre(category);
+      },
+    ),
           /// Movies Grid
-          Expanded(
-            child: BlocBuilder<BrowseCubit, BrowseState>(
-              builder: (context, state) {
-                if (state is BrowseLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+        Expanded(
+  child: BlocBuilder<BrowseCubit, BrowseState>(
+    builder: (context, state) {
+      if (state is BrowseLoading) {
+        return const Center(child: CircularProgressIndicator());
+      }
 
-                if (state is BrowseLoaded) {
-                  return GridView.builder(
-                    controller: controller,
-                    padding: EdgeInsets.only(
-                      top: 16.h,
-                      left: 8.w,
-                      right: 8.w,
-                      bottom: 16.h,
-                    ),
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20.w,
-                      mainAxisSpacing: 8.h,
-                      childAspectRatio: .68,
-                    ),
-                  itemCount: state.movies.length + (state.isLoadingMore ? 1 : 0),
-                  itemBuilder: (context, index) {
-  if (index >= state.movies.length) {
-    return const Padding(
-      padding: EdgeInsets.all(16),
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
+      if (state is BrowseLoaded) {
+        return MoviePagedGrid(
+          padding: EdgeInsets.only(
+  top: 25.h,
+  left: 8.w,
+  right: 8.w,
+  bottom: 16.h,
+),
+          movies: state.movies,
+          controller: controller,
+          isLoadingMore: state.isLoadingMore,
+          onLoadMore: () {
+            context.read<BrowseCubit>().loadMore();
+          },
+        );
+      }
 
-  return MovieCard(movie: state.movies[index]);
-},
-                  );
-                }
-
-                return const SizedBox();
-              },
-            ),
-          ),
+      return const SizedBox();
+    },
+  ),
+),
         ],
       ),
     );
