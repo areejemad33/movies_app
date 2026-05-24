@@ -36,10 +36,17 @@ class MyApp extends StatelessWidget {
       
         theme: ThemeManager.darkTheme,
         onGenerateRoute: RouteGenerator.getRoute,
+<<<<<<< HEAD
         initialRoute: seenOnboarding
             ? RoutesManager.login
 
       : RoutesManager.onBoarding,
+=======
+        initialRoute: RoutesManager.home,
+        // initialRoute: seenOnboarding
+        //     ? RoutesManager.login
+        //     : RoutesManager.onBoarding,
+>>>>>>> browse_tab
       ),
     );
   }

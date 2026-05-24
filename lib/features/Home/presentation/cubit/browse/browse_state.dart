@@ -8,8 +8,12 @@ class BrowseLoading extends BrowseState {}
 
 class BrowseLoaded extends BrowseState {
   final List<MovieEntity> movies;
+  final bool isLoadingMore;
 
-  BrowseLoaded(this.movies);
+  BrowseLoaded(
+    this.movies, {
+    this.isLoadingMore = false,
+  });
 }
 
 class BrowseError extends BrowseState {

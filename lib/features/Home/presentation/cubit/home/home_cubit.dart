@@ -20,29 +20,31 @@ class HomeCubit extends Cubit<HomeState> {
   return categories[Random().nextInt(categories.length)];
 }
 
-  Future<void> loadHome() async {
-    emit(state.copyWith(isLoading: true, error: null));
+Future<void> loadHome() async {
+  emit(state.copyWith(isLoading: true, error: null));
 
-    try {
-      final latestMovies = await getLatestMoviesUseCase();
+  try {
+    final latestMovies = await getLatestMoviesUseCase();
 
-      final randomGenre = getRandomGenre();
+    final randomGenre = state.selectedGenre.isEmpty
+        ? getRandomGenre()
+        : state.selectedGenre;
 
-      final genreMovies = await getRandomMoviesUseCase(randomGenre);
+    final genreMovies = await getRandomMoviesUseCase(randomGenre, 1);
 
-      emit(
-        state.copyWith(
-          latestMovies: latestMovies,
-          genreMovies: genreMovies,
-          selectedGenre: randomGenre,
-          currentIndex: 0,
-          isLoading: false,
-        ),
-      );
-    } catch (e) {
-      emit(state.copyWith(isLoading: false, error: e.toString()));
-    }
+    emit(
+      state.copyWith(
+        latestMovies: latestMovies,
+        genreMovies: genreMovies,
+        selectedGenre: randomGenre,
+        currentIndex: 0,
+        isLoading: false,
+      ),
+    );
+  } catch (e) {
+    emit(state.copyWith(isLoading: false, error: e.toString()));
   }
+}
 
   void changeIndex(int index) {
     emit(state.copyWith(currentIndex: index));
@@ -52,7 +54,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(isLoading: true, selectedGenre: genre));
 
     try {
-      final movies = await getRandomMoviesUseCase(genre);
+      final movies = await getRandomMoviesUseCase(genre,1);
 
       emit(state.copyWith(genreMovies: movies, isLoading: false));
     } catch (e) {

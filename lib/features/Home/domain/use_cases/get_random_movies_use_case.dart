@@ -10,9 +10,9 @@ class GetMoviesByGenreUseCase {
 
   GetMoviesByGenreUseCase(this.repository);
 
-  Future<List<MovieEntity>> call(String genre) {
-    return repository.getMoviesByGenre(genre);
-  }
+  Future<List<MovieEntity>> call(String genre, int page) {
+  return repository.getMoviesByGenre(genre, page: page);
+}
   
 }
 

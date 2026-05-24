@@ -14,8 +14,11 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:movies_app/core/api/api_manager.dart' as _i784;
 import 'package:movies_app/features/Home/data/data_sources/home_remote_data_source.dart'
     as _i585;
+<<<<<<< HEAD
 import 'package:movies_app/features/Home/data/data_sources/search_remote_data_source.dart'
     as _i579;
+=======
+>>>>>>> browse_tab
 import 'package:movies_app/features/Home/data/repositeries_implementation/home_repository_impl.dart'
     as _i755;
 import 'package:movies_app/features/Home/data/repositeries_implementation/search_repository_impl.dart'
@@ -47,6 +50,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i784.ApiManager>(() => _i784.ApiManager());
     gh.factory<_i585.HomeRemoteDataSource>(
       () => _i585.HomeRemoteDataSource(gh<_i784.ApiManager>()),
+<<<<<<< HEAD
     );
     gh.factory<_i579.SearchRemoteDataSource>(
       () => _i579.SearchRemoteDataSource(gh<_i784.ApiManager>()),
@@ -62,6 +66,11 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i72.SearchCubit>(
       () => _i72.SearchCubit(gh<_i214.SearchMoviesUseCase>()),
+=======
+    );
+    gh.factory<_i104.HomeRepository>(
+      () => _i755.HomeRepositoryImpl(gh<_i585.HomeRemoteDataSource>()),
+>>>>>>> browse_tab
     );
     gh.factory<_i747.GetLatestMoviesUseCase>(
       () => _i747.GetLatestMoviesUseCase(gh<_i104.HomeRepository>()),
