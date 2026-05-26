@@ -10,6 +10,8 @@ class AppButton extends StatelessWidget {
   final Widget? icon;
   final Color? backgroundColor;
   final Color? textColor;
+  final TextStyle? textStyle;
+  final BorderSide? borderSide;
 
   const AppButton({
     super.key,
@@ -20,6 +22,8 @@ class AppButton extends StatelessWidget {
     this.icon,
     this.backgroundColor,
     this.textColor,
+    this.textStyle,
+    this.borderSide,
   });
 
   @override
@@ -30,22 +34,36 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           backgroundColor: backgroundColor ?? ColorsManager.yellow,
           foregroundColor: textColor ?? ColorsManager.black,
+
+          side: borderSide,
+
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(15.r),
           ),
         ),
         child: isLoading
             ? const CircularProgressIndicator()
             : icon == null
-                ? Text(text, style: Theme.of(context).textTheme.headlineLarge)
+                ? Text(
+                    text,
+                    style:
+                        textStyle ??
+                        Theme.of(context).textTheme.headlineLarge,
+                  )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       icon!,
                       SizedBox(width: 10.w),
-                      Text(text, style: Theme.of(context).textTheme.displaySmall),
+                      Text(
+                        text,
+                        style:
+                            textStyle ??
+                            Theme.of(context).textTheme.displaySmall,
+                      ),
                     ],
                   ),
       ),

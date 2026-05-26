@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/features/onBoarding/presentation/Models/onboarding_model.dart';
-import 'package:movies_app/features/onBoarding/widgets/push_button.dart';
+import 'package:movies_app/core/widgets/app_button.dart';
+import 'package:movies_app/features/onboarding/presentation/Models/onboarding_model.dart';
 
 
 class FirstOnboarding extends StatelessWidget {
@@ -19,26 +19,9 @@ class FirstOnboarding extends StatelessWidget {
         children: [
         Image.asset(
        onboardingModel.image,
-        fit: BoxFit.fill,
+        fit: BoxFit.cover,
       ),
-          Container(
-
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  onboardingModel.color.withOpacity(0.0),
-                  onboardingModel.color.withOpacity(0.5),
-                  onboardingModel.color.withOpacity(0.91),
-                  onboardingModel.color.withOpacity(1.0),
-
-                ],
-                stops: const [0.0, 0.5, 0.91, 1.0],
-              ),
-            ),
-
-          ),
+        
         Padding(
           padding: REdgeInsets.symmetric(horizontal: 16.w,vertical: 33.h),
           child: Column(
@@ -46,7 +29,7 @@ class FirstOnboarding extends StatelessWidget {
             children: [
               Text(
                 textAlign: TextAlign.center,
-                onboardingModel.title,
+                onboardingModel.title ,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               SizedBox(height: 16.h,),
@@ -57,8 +40,8 @@ class FirstOnboarding extends StatelessWidget {
               ),
 
 
-              SizedBox(height: 9.h,),
-             PushButton(title: 'Explore Now', onNext: onNext),
+              SizedBox(height: 24.h,),
+             AppButton(text: 'Explore Now', onPressed: onNext , textStyle: Theme.of(context).textTheme.displayMedium,),
             ]
           ),
         ),

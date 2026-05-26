@@ -64,4 +64,7 @@ class AssetsManager {
   static const String onboarding4 = "assets/images/onboarding4.jpg";
   static const String onboarding5 = "assets/images/onboarding5.jpg";
   static const String onboarding6 = "assets/images/onboarding6.jpg";
+
+
+
 }

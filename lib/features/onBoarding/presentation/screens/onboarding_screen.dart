@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/features/onBoarding/presentation/Models/onboarding_model.dart';
+import 'package:movies_app/features/onboarding/presentation/Models/onboarding_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/first_onboarding.dart';
 import '../../widgets/onboarding_page.dart';
@@ -48,34 +48,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     bool isLastPage = _currentIndex == pages.length - 1;
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        body: PageView.builder(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: pages.length,
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          itemBuilder: (context, index) {
-            if (index == 0) {
-              return FirstOnboarding(
-                onboardingModel: pages[index],
-                onNext: _next,
-              );
-            } else {
-              return OnboardingPage(
-title: isLastPage ? 'Finish' : 'Next',
-                onboardingModel: pages[index],
-                onNext: _next,
-                onBack: _back,
-              );
-            }
-          },
-        ),
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: PageView.builder(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: pages.length,
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return FirstOnboarding(
+              onboardingModel: pages[index],
+              onNext: _next,
+            );
+          } else {
+            return OnboardingPage(
+              onboardingModel: pages[index],
+              onNext: _next,
+              onBack: _back,
+              title: isLastPage ? 'Finish' : 'Next',
+              showBack: index != 1,
+            );
+          }
+        },
       ),
     );
   }
