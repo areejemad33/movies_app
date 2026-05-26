@@ -1,156 +1,140 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
-
+import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart';
+import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_state.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/cast_section.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/genere_item.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/info_card.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/movie_header_section.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/screenshot_heading.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/similar_section.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/summary_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/watch_button.dart';
 
-class MovieDetails extends StatelessWidget {
-  const MovieDetails({super.key, required int movieId});
+
+class MovieDetails extends StatefulWidget {
+  final int movieId;
+
+  const MovieDetails({super.key, required this.movieId});
+
+  @override
+  State<MovieDetails> createState() => _MovieDetailsState();
+}
+
+class _MovieDetailsState extends State<MovieDetails> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MovieDetailsCubit>().getMovieDetails(widget.movieId);
+        context.read<MovieDetailsCubit>().getSimilarMovies(widget.movieId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: const Color(0xFF121312),
+          body: _buildBody(state),
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(MovieDetailsState state) {
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (state.error != null) {
+      return Center(
+        child: Text(state.error!, style: const TextStyle(color: Colors.white)),
+      );
+    }
+
+    if (state.movie == null) {
+      return const Center(
+        child: Text('No Data', style: TextStyle(color: Colors.white)),
+      );
+    }
+
+    final movie = state.movie!;
+
     return SafeArea(
-      child: Scaffold(
-        body: Stack(
+      child: SingleChildScrollView(
+        child: Column(
           children: [
-            CachedNetworkImage(
-              imageUrl:
-                  'https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg',
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 645.h,
-              placeholder: (context, url) => Container(color: Colors.black),
-              errorWidget: (context, url, error) =>
-                  Container(color: Colors.black),
-            ),
+            /// HEADER
+            MovieHeaderSection(movie: movie),
 
-            Container(
-              height: 645.h,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color.fromRGBO(18, 19, 18, 0.2), Color(0xFF121312)],
-                  stops: [0.0, 1.0],
-                ),
-              ),
-            ),
+            const WatchButton(),
 
-            /// Dark Overlay
-            SingleChildScrollView(
-              child: Column(
+            SizedBox(height: 16.h),
+
+            /// INFO CARDS
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.bookmark_rounded,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                      ],
+                  Expanded(
+                    child: Infocard(
+                      icon: AssetsManager.favoritIcon,
+                      text: movie.likeCount.toString()
                     ),
                   ),
 
-                  ////////////////////////mn hna
-                  const SizedBox(height: 120),
+                  SizedBox(width: 14.w),
 
-                  /// Play Button
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF6BD00),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 8),
-                    ),
-                    child: const Icon(
-                      Icons.play_arrow,
-                      color: Colors.white,
-                      size: 50,
+                  Expanded(
+                    child: Infocard(
+                      icon: AssetsManager.watchTime,
+                      text: '${movie.runtime}',
                     ),
                   ),
 
-                  const SizedBox(height: 250),
+                  SizedBox(width: 14.w),
 
-                  /// Movie Title
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      'Doctor Strange in the Multiverse\nof Madness',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Expanded(
+                    child: Infocard(
+                      icon: AssetsManager.starIcon,
+                      text: movie.rating.toString(),
                     ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  /// Year
-                  const Text(
-                    '2022',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-
-                  const SizedBox(height: 30),
-
-                  WatchButton(),
-                  const SizedBox(height: 16),
-
-                  /// Info Cards
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Infocard(
-                            icon: AssetsManager.favoritIcon,
-                            text: '15',
-                          ),
-                        ),
-                        const SizedBox(width: 15),
-                        Infocard(icon: AssetsManager.watchTime, text: '90'),
-                        const SizedBox(width: 15),
-                        Expanded(
-                          child: Infocard(
-                            icon: AssetsManager.starIcon,
-                            text: '7.6',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 40),
-
-                  /// Screenshots Title
                 ],
               ),
             ),
+
+            SizedBox(height: 20.h),
+
+            // / EXTRA CONTENT
+            ScreenshotHeading(
+  screenshots: movie.screenshots,
+),
+
+            SizedBox(height: 12.h),
+
+            /// Similar Section
+          SimilarSection(
+  movies: state.similarMovies,
+),
+
+            /// Summary
+            SummarySection(description: movie.description),
+
+            /// Cast
+          CastSection(
+  cast: movie.cast,
+),
+
+            /// Genres
+            GenresSection(genres: movie.genres),
+
+            SizedBox(height: 24.h),
           ],
         ),
       ),

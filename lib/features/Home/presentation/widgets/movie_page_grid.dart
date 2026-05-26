@@ -44,11 +44,11 @@
 //   }
 // }
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/core/routes/routes_manager.dart';
+import 'package:movies_app/core/widgets/movie_card.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
-import 'package:movies_app/features/Home/presentation/widgets/movie_card.dart';
 
 class MoviePagedGrid extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -63,7 +63,7 @@ class MoviePagedGrid extends StatelessWidget {
     required this.controller,
     required this.isLoadingMore,
     this.onLoadMore,
-    required this.padding
+    required this.padding,
   });
 
   @override
@@ -88,12 +88,19 @@ class MoviePagedGrid extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           if (index >= movies.length) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
-          return MovieCard(movie: movies[index]);
+          return MovieCard(
+            movie: movies[index],
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RoutesManager.movieDetails,
+                arguments: movies[index].id,
+              );
+            },
+          );
         },
       ),
     );

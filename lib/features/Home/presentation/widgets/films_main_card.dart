@@ -30,12 +30,12 @@ class FilmsMain extends StatelessWidget {
           fit: BoxFit.cover,
           width: double.infinity,
           height: 645.h,
-
+    
           placeholder: (context, url) => Container(color: Colors.black),
-
+    
           errorWidget: (context, url, error) => Container(color: Colors.black),
         ),
-
+    
         Container(
           height: 645.h,
           decoration: BoxDecoration(
@@ -51,20 +51,22 @@ class FilmsMain extends StatelessWidget {
             ),
           ),
         ),
-
+    
         /// CONTENT (STATIC UI ONLY)
         Center(
           child: Column(
             children: [
               Image.asset(
                 height: 93.h,
-                width: 257.w,
+                width: 267.w,
                 AssetsManager.availableNow,
               ),
-
+              SizedBox(height: 21,),
+    
               /// CAROUSEL (separated widget)
               MoviesCarousel(movies: movies, onChanged: onPageChanged),
-
+                SizedBox(height: 21,),
+    
               Image.asset(width: 354.w, height: 146.h, AssetsManager.watchNow),
             ],
           ),
