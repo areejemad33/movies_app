@@ -3,12 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/core/constants/categories.dart';
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_cubit.dart';
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_state.dart';
 import 'package:movies_app/features/Home/presentation/widgets/browse_categories.dart';
-import 'package:movies_app/features/Home/presentation/widgets/category_item.dart';
-import 'package:movies_app/features/Home/presentation/widgets/movie_card.dart';
 import 'package:movies_app/features/Home/presentation/widgets/movie_page_grid.dart';
 
 class BrowseTab extends StatefulWidget {

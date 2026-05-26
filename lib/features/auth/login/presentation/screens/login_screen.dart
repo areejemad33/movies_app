@@ -55,6 +55,10 @@ class _LoginViewState extends State<_LoginView> {
         BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
+               Navigator.pushReplacementNamed(
+        context,
+        RoutesManager.home,
+      );
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Successfully Logged In!'),

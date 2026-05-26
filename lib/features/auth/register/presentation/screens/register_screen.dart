@@ -6,7 +6,6 @@ import 'package:movies_app/core/widgets/app_language_switch.dart';
 import 'package:movies_app/features/auth/register/presentation/widgets/already_have_account.dart';
 import 'package:movies_app/features/auth/register/presentation/widgets/avatar_selector.dart';
 import 'package:movies_app/features/auth/register/presentation/widgets/register_form.dart';
-import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/routes/routes_manager.dart';
 import '../../cubit/register_cubit.dart';
 import '../../cubit/register_states.dart';
