@@ -7,7 +7,12 @@ import 'package:movies_app/features/Home/presentation/screens/home_screen.dart';
 import 'package:movies_app/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:movies_app/features/auth/register/presentation/screens/register_screen.dart';
 import 'package:movies_app/features/auth/reset_password/presentation/screens/reset_password_screen.dart';
+<<<<<<< HEAD
 import 'package:movies_app/features/movie_details/presentation/screens/movie_details.dart';
+=======
+import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart';
+import 'package:movies_app/features/movie_details/presentation/movie_details.dart';
+>>>>>>> feature_movie_details
 import '../../features/onBoarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/presentation/screens/update_profile._screen.dart';
 import 'routes_manager.dart';
@@ -53,6 +58,16 @@ case RoutesManager.home:
         case RoutesManager.movieDetails:
         return MaterialPageRoute(builder: (_) => const MovieDetails());
 
+
+         case RoutesManager.movieDetails:
+  final movieId = settings.arguments as int;
+
+  return MaterialPageRoute(
+    builder: (_) => BlocProvider(
+      create: (_) => getIt<MovieDetailsCubit>()..getMovieDetails(movieId),
+      child: MovieDetails(movieId: movieId),
+    ),
+  );
 
       default:
         return MaterialPageRoute(

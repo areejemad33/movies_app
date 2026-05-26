@@ -18,7 +18,13 @@ class Infocard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+<<<<<<< HEAD
           Image.asset(icon),
+=======
+          SizedBox(
+            child: Image.asset(icon, width: 28.w, fit: BoxFit.contain),
+          ),
+>>>>>>> feature_movie_details
           const SizedBox(width: 12),
           Text(text, style: Theme.of(context).textTheme.labelLarge),
         ],

@@ -1,0 +1,18 @@
+     /// EXTRA CONTENT
+                  // const ScreenshotHeading(),
+
+                  // SizedBox(height: 12.h),
+
+                  // /// Similar Section
+                  // const SimilarSection(),
+
+                  // /// Summary
+                  // SummarySection(description: movie.description),
+
+                  // /// Cast
+                  // const CastSection(),
+
+                  // /// Genres
+                  // GenresSection(genres: movie.genres),
+
+                  // SizedBox(height: 24.h),

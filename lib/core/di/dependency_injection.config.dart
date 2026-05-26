@@ -28,6 +28,7 @@ import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usec
     as _i747;
 import 'package:movies_app/features/Home/domain/use_cases/get_random_movies_use_case.dart'
     as _i391;
+<<<<<<< HEAD
 import 'package:movies_app/features/Home/domain/use_cases/search_movies_use_case.dart'
     as _i214;
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_cubit.dart'
@@ -36,6 +37,24 @@ import 'package:movies_app/features/Home/presentation/cubit/home/home_cubit.dart
     as _i999;
 import 'package:movies_app/features/Home/presentation/cubit/search/search_cubit.dart'
     as _i497;
+=======
+import 'package:movies_app/features/Home/presentation/cubit/browse_cubit.dart'
+    as _i779;
+import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart'
+    as _i224;
+import 'package:movies_app/features/movie_details/data/movie_details_remote_data_source.dart'
+    as _i708;
+import 'package:movies_app/features/movie_details/data/repositary_implementation/movie_details_repository_impl.dart'
+    as _i310;
+import 'package:movies_app/features/movie_details/domain/repositiries/movie_details_repositery.dart'
+    as _i525;
+import 'package:movies_app/features/movie_details/domain/use_cases/get_similar_movies_usecase.dart'
+    as _i256;
+import 'package:movies_app/features/movie_details/domain/use_cases/movie_details_usecase.dart'
+    as _i342;
+import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart'
+    as _i860;
+>>>>>>> feature_movie_details
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -51,6 +70,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i579.SearchRemoteDataSource>(
       () => _i579.SearchRemoteDataSource(gh<_i784.ApiManager>()),
     );
+    gh.factory<_i708.MovieDetailsRemoteDataSource>(
+      () => _i708.MovieDetailsRemoteDataSource(gh<_i784.ApiManager>()),
+    );
     gh.factory<_i104.HomeRepository>(
       () => _i755.HomeRepositoryImpl(gh<_i585.HomeRemoteDataSource>()),
     );
@@ -62,6 +84,17 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i497.SearchCubit>(
       () => _i497.SearchCubit(gh<_i214.SearchMoviesUseCase>()),
+    );
+    gh.factory<_i525.MovieDetailsRepositery>(
+      () => _i310.MovieDetailsRepositoryImpl(
+        gh<_i708.MovieDetailsRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i256.GetSimilarMoviesUseCase>(
+      () => _i256.GetSimilarMoviesUseCase(gh<_i525.MovieDetailsRepositery>()),
+    );
+    gh.factory<_i342.GetMovieDetailsUseCase>(
+      () => _i342.GetMovieDetailsUseCase(gh<_i525.MovieDetailsRepositery>()),
     );
     gh.factory<_i747.GetLatestMoviesUseCase>(
       () => _i747.GetLatestMoviesUseCase(gh<_i104.HomeRepository>()),
@@ -76,6 +109,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i999.HomeCubit(
         gh<_i747.GetLatestMoviesUseCase>(),
         gh<_i391.GetMoviesByGenreUseCase>(),
+      ),
+    );
+    gh.factory<_i860.MovieDetailsCubit>(
+      () => _i860.MovieDetailsCubit(
+        gh<_i342.GetMovieDetailsUseCase>(),
+        gh<_i256.GetSimilarMoviesUseCase>(),
       ),
     );
     return this;
