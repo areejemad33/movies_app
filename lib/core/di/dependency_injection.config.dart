@@ -28,7 +28,6 @@ import 'package:movies_app/features/Home/domain/use_cases/get_latest_movies_usec
     as _i747;
 import 'package:movies_app/features/Home/domain/use_cases/get_random_movies_use_case.dart'
     as _i391;
-<<<<<<< HEAD
 import 'package:movies_app/features/Home/domain/use_cases/search_movies_use_case.dart'
     as _i214;
 import 'package:movies_app/features/Home/presentation/cubit/browse/browse_cubit.dart'
@@ -37,11 +36,6 @@ import 'package:movies_app/features/Home/presentation/cubit/home/home_cubit.dart
     as _i999;
 import 'package:movies_app/features/Home/presentation/cubit/search/search_cubit.dart'
     as _i497;
-=======
-import 'package:movies_app/features/Home/presentation/cubit/browse_cubit.dart'
-    as _i779;
-import 'package:movies_app/features/Home/presentation/cubit/home_cubit.dart'
-    as _i224;
 import 'package:movies_app/features/movie_details/data/movie_details_remote_data_source.dart'
     as _i708;
 import 'package:movies_app/features/movie_details/data/repositary_implementation/movie_details_repository_impl.dart'
@@ -54,7 +48,6 @@ import 'package:movies_app/features/movie_details/domain/use_cases/movie_details
     as _i342;
 import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart'
     as _i860;
->>>>>>> feature_movie_details
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -79,12 +72,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i414.SearchRepository>(
       () => _i534.SearchRepositoryImpl(gh<_i579.SearchRemoteDataSource>()),
     );
-    gh.factory<_i214.SearchMoviesUseCase>(
-      () => _i214.SearchMoviesUseCase(gh<_i414.SearchRepository>()),
-    );
-    gh.factory<_i497.SearchCubit>(
-      () => _i497.SearchCubit(gh<_i214.SearchMoviesUseCase>()),
-    );
     gh.factory<_i525.MovieDetailsRepositery>(
       () => _i310.MovieDetailsRepositoryImpl(
         gh<_i708.MovieDetailsRemoteDataSource>(),
@@ -95,6 +82,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i342.GetMovieDetailsUseCase>(
       () => _i342.GetMovieDetailsUseCase(gh<_i525.MovieDetailsRepositery>()),
+    );
+    gh.factory<_i214.SearchMoviesUseCase>(
+      () => _i214.SearchMoviesUseCase(gh<_i414.SearchRepository>()),
+    );
+    gh.factory<_i497.SearchCubit>(
+      () => _i497.SearchCubit(gh<_i214.SearchMoviesUseCase>()),
     );
     gh.factory<_i747.GetLatestMoviesUseCase>(
       () => _i747.GetLatestMoviesUseCase(gh<_i104.HomeRepository>()),

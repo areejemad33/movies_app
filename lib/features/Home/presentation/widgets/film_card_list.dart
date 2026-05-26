@@ -21,15 +21,11 @@ class FilmCardList extends StatelessWidget {
 
           return GestureDetector(
             onTap: () {
-<<<<<<< HEAD
-              Navigator.pushNamed(context, RoutesManager.movieDetails);
-=======
               Navigator.pushNamed(
                 context,
                 RoutesManager.movieDetails,
                 arguments: movie.id,
               );
->>>>>>> feature_movie_details
             },
             child: Container(
               width: 146,

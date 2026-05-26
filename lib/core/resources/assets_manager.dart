@@ -42,11 +42,10 @@ class AssetsManager {
       'assets/images/captain_american_film.jpg';
 
   static const String starIcon = 'assets/icons/star_icon.png';
-<<<<<<< HEAD
-  static const String favoritIcon = 'assets/icons/movie_details/favorit.png';
-  static const String watchTime = 'assets/icons/movie_details/watch time.png';
+
+
   static const String emptySearch = 'assets/images/empty_search.png';
-=======
+
   
   static const String favoritIcon = 'assets/icons/favorit.png';
   static const String watchTime = 'assets/icons/watch time.png';
@@ -54,7 +53,7 @@ class AssetsManager {
 
 
 
->>>>>>> feature_movie_details
+
 
   static const String logo = "assets/images/logo.png";
   static const String resetPassword = "assets/images/reset_password.png";

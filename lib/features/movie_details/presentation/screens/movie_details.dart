@@ -7,7 +7,7 @@ import 'package:movies_app/features/movie_details/presentation/widgets/info_card
 import 'package:movies_app/features/movie_details/presentation/widgets/watch_button.dart';
 
 class MovieDetails extends StatelessWidget {
-  const MovieDetails({super.key});
+  const MovieDetails({super.key, required int movieId});
 
   @override
   Widget build(BuildContext context) {
