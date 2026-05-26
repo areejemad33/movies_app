@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'login_states.dart';
@@ -6,6 +7,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> login({
     required String email,
@@ -14,10 +16,22 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoginLoading());
 
+      final UserCredential userCredential =
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      final doc = await _firestore
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .get();
+
+      if (!doc.exists) {
+        await _auth.signOut();
+        emit(LoginError('Account not found. Please register first.'));
+        return;
+      }
 
       emit(LoginSuccess());
 

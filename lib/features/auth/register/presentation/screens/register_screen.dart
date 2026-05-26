@@ -32,7 +32,7 @@ class _RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<_RegisterView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _selectedAvatar = AssetsManager.avatars[0];
+  String _selectedAvatarId = '0';
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -52,17 +52,29 @@ class _RegisterViewState extends State<_RegisterView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
-      listener: (context, state) {
-        if (state is RegisterSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Successfully Registered"),
-              backgroundColor: Colors.green,
-            ),
-          );
+        listener: (context, state) {
+          if (state is RegisterSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("Successfully Registered"),
+                backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.pushReplacementNamed(context, RoutesManager.login);
+          }
 
-          Navigator.pushReplacementNamed(context, RoutesManager.login);
-        }
+          if (state is RegisterError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            );
+          }
       },
       builder: (context, state) {
         return Scaffold(
@@ -77,8 +89,8 @@ class _RegisterViewState extends State<_RegisterView> {
                 child: Column(
                   children: [
                     AvatarSelector(
-                      onAvatarSelected: (avatar) {
-                        _selectedAvatar = avatar;
+                      onAvatarSelected: (avatarId) {
+                        _selectedAvatarId = avatarId;
                       },
                     ),
                     SizedBox(height: 10.h),
@@ -106,7 +118,7 @@ class _RegisterViewState extends State<_RegisterView> {
                             password: _passwordController.text,
                             confirmPassword: _confirmPasswordController.text,
                             phone: _phoneController.text.trim(),
-                            avatar: _selectedAvatar,
+                            avatarId: _selectedAvatarId,
                           );
                         }
                       },
