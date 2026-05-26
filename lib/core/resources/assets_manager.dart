@@ -44,7 +44,8 @@ class AssetsManager {
 
   static const String starIcon = 'assets/icons/star_icon.png';
   
-
+  static const String favoritIcon = 'assets/icons/favorit.png';
+  static const String watchTime = 'assets/icons/watch time.png';
 
 
 

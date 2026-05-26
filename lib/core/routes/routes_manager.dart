@@ -5,8 +5,8 @@ class RoutesManager {
   static const String onBoarding = "/onboarding";
   static const String updateProfile = "/updateProfile";
   static const String resetPassword = "/resetPassword";
-    static const String home = "/home";
-
+  static const String home = "/home";
+  static const String movieDetails = 'movieDetails';
 
 
 }

@@ -5,7 +5,7 @@ class MovieModel extends MovieEntity {
     required super.id,
     required super.title,
     required super.image,
-    required super.rating,
+    required super.rating, 
   });
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
@@ -14,6 +14,7 @@ class MovieModel extends MovieEntity {
       title: json['title'],
       image: json['medium_cover_image'],
       rating: (json['rating'] ?? 0).toDouble(),
+    
     );
   }
 }
