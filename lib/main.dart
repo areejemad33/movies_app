@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         onGenerateRoute: RouteGenerator.getRoute,
     
               initialRoute: seenOnboarding
-            ? RoutesManager.login
+            ? RoutesManager.updateProfile
 
       : RoutesManager.onBoarding,
 
