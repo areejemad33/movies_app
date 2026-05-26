@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
 import 'package:movies_app/core/resources/colors_manager.dart';
 import 'package:movies_app/features/auth/login/presentation/widgets/login_form.dart';
@@ -10,7 +11,6 @@ import '../../../../../core/widgets/app_language_switch.dart';
 import '../../cubit/login_states.dart';
 import '../../cubit/sign_in_with_google_cubit.dart';
 import '../../cubit/sign_in_with_google_states.dart';
-import '../widgets/login_with_google_button.dart';
 import '../../cubit/login_cubit.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -103,21 +103,23 @@ class _LoginViewState extends State<_LoginView> {
         builder: (context, state) {
           return Form(
             key: _formKey,
-            child: SafeArea(
-              child: Scaffold(
-                body: SingleChildScrollView(
+            child: Scaffold(
+              body: SafeArea(
+                child: SingleChildScrollView(
                   child: Padding(
                     padding: REdgeInsets.symmetric(horizontal: 19.w, vertical: 8),
                     child: Column(
                       children: [
-                        Image.asset(AssetsManager.logo),
+                                                SizedBox(height: 50.h),
+                            
+                        Image.asset(AssetsManager.logo , ),
                         SizedBox(height: 69.h),
                         LoginForm(
                           emailController: _emailController,
                           passwordController: _passwordController,
-
+                            
                         ),
-                        SizedBox(height: 17.18.h),
+                        SizedBox(height: 17.h),
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -145,7 +147,7 @@ class _LoginViewState extends State<_LoginView> {
                             }
                           },
                         ),
-                        SizedBox(height: 22.47.h),
+                        SizedBox(height: 22.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -195,8 +197,9 @@ class _LoginViewState extends State<_LoginView> {
                         SizedBox(height: 28.h),
                         BlocBuilder<GoogleAuthCubit, GoogleAuthState>(
                           builder: (context, googleState) {
-                            return LoginWithGoogleButton(
-                              text: "Login With Google",
+                            return AppButton(
+  text: "Login With Google",
+  icon: SvgPicture.asset(AssetsManager.googleIcon),
                               isLoading: googleState is GoogleAuthLoading,
                               onPressed: () {
                                 context
