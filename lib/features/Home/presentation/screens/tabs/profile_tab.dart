@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
-import 'package:movies_app/features/Home/presentation/widgets/tab_item.dart';
+import 'package:movies_app/features/profile/presentation/widgets/tab_item.dart';
 import '../../../../../core/resources/colors_manager.dart';
 import '../../../../../core/routes/routes_manager.dart';
 import '../../../../../core/widgets/app_button.dart';
-import '../../../../profile/cubit/profile/profile_cubit.dart';
-import '../../../../profile/cubit/profile/profile_states.dart';
-import '../../../../profile/cubit/tabs/tabs_cubit.dart';
-import '../../../../profile/cubit/tabs/tabs_states.dart';
+import '../../../../profile/presentation/cubit/profile/profile_cubit.dart';
+import '../../../../profile/presentation/cubit/profile/profile_states.dart';
+import '../../../../profile/presentation/cubit/tabs/tabs_cubit.dart';
+import '../../../../profile/presentation/cubit/tabs/tabs_states.dart';
 import '../../../../profile/presentation/widgets/movies_tab.dart';
-import '../../widgets/exit_button.dart';
+import '../../../../profile/presentation/widgets/exit_button.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});

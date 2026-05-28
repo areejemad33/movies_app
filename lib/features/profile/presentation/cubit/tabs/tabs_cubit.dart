@@ -105,9 +105,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/features/profile/cubit/tabs/tabs_states.dart';
+import 'package:movies_app/features/profile/presentation/cubit/tabs/tabs_states.dart';
 
-import '../../../Home/data/models/movie_model.dart';
+import '../../../../Home/data/models/movie_model.dart';
 
 class TabsCubit extends Cubit<TabsState> {
   TabsCubit() : super(TabsInitial());

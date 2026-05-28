@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 
 class AppTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
@@ -13,8 +14,10 @@ class AppTextFormField extends StatelessWidget {
   final TextInputType keyboardType;
 
   final TextEditingController? controller;
-
-  const AppTextFormField({
+  
+    final  int ?maxLength ;
+    final  MaxLengthEnforcement ?maxLengthEnforcement ;
+   const AppTextFormField({
     super.key,
     required this.hintText,
 
@@ -26,33 +29,30 @@ class AppTextFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
 
     this.controller,
-    required this.validator,
+    required this.validator, 
+  
+    this.maxLength,
+    this.maxLengthEnforcement 
   });
 
   @override
   Widget build(BuildContext context) {
 
-    return TextFormField(
-      validator: validator,
+  return TextFormField(
+  controller: controller,
+  validator: validator,
+  obscureText: obscureText,
+  keyboardType: keyboardType,
 
-      controller: controller,
+  maxLength: maxLength,
+  maxLengthEnforcement: maxLengthEnforcement,
 
-      obscureText: obscureText,
-
-      keyboardType: keyboardType,
-
-      decoration: InputDecoration(
-
-        hintText: hintText,
-
-        hintStyle:
-            Theme.of(context).textTheme.bodyLarge,
-
-        prefixIcon: prefixIcon,
-         suffixIcon: suffixIcon,
-
-
-      ),
-    );
+  decoration: InputDecoration(
+    hintText: hintText,
+    hintStyle: Theme.of(context).textTheme.bodyLarge,
+    prefixIcon: prefixIcon,
+    suffixIcon: suffixIcon,
+  ),
+);
   }
 }

@@ -12,7 +12,7 @@ import 'package:movies_app/features/movie_details/presentation/widgets/screensho
 import 'package:movies_app/features/movie_details/presentation/widgets/similar_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/summary_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/watch_button.dart';
-import 'package:movies_app/features/profile/cubit/tabs/tabs_cubit.dart';
+import 'package:movies_app/features/profile/presentation/cubit/tabs/tabs_cubit.dart';
 
 
 class MovieDetails extends StatefulWidget {

@@ -4,8 +4,8 @@ import 'package:movies_app/core/resources/colors_manager.dart';
 import 'package:movies_app/features/movie_details/domain/entities/movie_details_entity.dart';
 
 import '../../../Home/data/models/movie_model.dart';
-import '../../../profile/cubit/tabs/tabs_cubit.dart';
-import '../../../profile/cubit/tabs/tabs_states.dart';
+import '../../../profile/presentation/cubit/tabs/tabs_cubit.dart';
+import '../../../profile/presentation/cubit/tabs/tabs_states.dart';
 
 class BookmarkButton extends StatefulWidget {
 final MovieDetailsEntity movie;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/resources/assets_manager.dart';
+import 'package:movies_app/core/utils/validators/auth_validator.dart';
 import 'package:movies_app/core/widgets/app_text_form_field.dart';
 
 
@@ -30,12 +32,7 @@ class _RegisterFormState extends State<RegisterForm> {
       controller:widget.nameController,
       hintText: "Name",
       prefixIcon: Image.asset(AssetsManager.nameIcon),
-      validator:  (value) {
-        if (value == null || value.isEmpty) return 'Name is required';
-        if (value.length < 3) return 'Name must be at least 3 characters';
-        if (!RegExp(r'^[a-zA-Z\s]+$').hasMatch(value)) return 'Name must contain letters only';
-        return null;
-      },
+  validator: AuthValidators.name,
     ),
         SizedBox(height: 24.h),
         AppTextFormField(
@@ -44,11 +41,7 @@ class _RegisterFormState extends State<RegisterForm> {
       hintText: "Email",
       prefixIcon: Image.asset(AssetsManager.emailIcon),
       keyboardType: TextInputType.emailAddress,
-          validator:  (value) {
-            if (value == null || value.isEmpty) return 'Email is required';
-            if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) return 'Enter a valid email';
-            return null;
-          },
+        validator: AuthValidators.email,
     ),
         SizedBox(height: 24.h),
          AppTextFormField(
@@ -60,13 +53,11 @@ class _RegisterFormState extends State<RegisterForm> {
           child:  _obscurePassword ? Image.asset(
             AssetsManager.eyeOff ): Icon(Icons.remove_red_eye),),
       obscureText: _obscurePassword,
-           validator: (value) {
-             if (value == null || value.isEmpty) return 'Password is required';
-             if (value.length < 8) return 'Password must be at least 8 characters';
-             if (!RegExp(r'[A-Z]').hasMatch(value)) return 'Must contain uppercase letter';
-             if (!RegExp(r'[0-9]').hasMatch(value)) return 'Must contain a number';
-             return null;
-           },
+          validator: (value) =>
+    AuthValidators.confirmPassword(
+      value,
+      widget.passwordController.text,
+    ),
     ),
 
         SizedBox(height: 24.h),
@@ -85,17 +76,19 @@ class _RegisterFormState extends State<RegisterForm> {
          },
     ),
         SizedBox(height: 24.h),
-       AppTextFormField(
-         controller: widget.phoneController,
-      hintText: "Phone",
-      prefixIcon: Image.asset(AssetsManager.phoneIcon),
-      keyboardType: TextInputType.phone,
-         validator: (value) {
-           if (value == null || value.isEmpty) return 'Phone is required';
-           if (!RegExp(r'^01[0125][0-9]{8}$').hasMatch(value)) return 'Enter a valid Egyptian phone number';
-           return null;
-         },
-    ),
+    AppTextFormField(
+  controller: widget.phoneController,
+  hintText: "Phone",
+  prefixIcon: Image.asset(AssetsManager.phoneIcon),
+  keyboardType: TextInputType.phone,
+
+
+
+  maxLength: 11,
+  maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+  validator: AuthValidators.phone
+),
       ],
     );
   }

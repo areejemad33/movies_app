@@ -6,7 +6,7 @@ import 'package:movies_app/core/resources/colors_manager.dart';
 import 'package:movies_app/core/widgets/rating_badge.dart';
 import 'package:movies_app/features/Home/data/models/movie_model.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
-import 'package:movies_app/features/profile/cubit/tabs/tabs_cubit.dart';
+import 'package:movies_app/features/profile/presentation/cubit/tabs/tabs_cubit.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieEntity movie;

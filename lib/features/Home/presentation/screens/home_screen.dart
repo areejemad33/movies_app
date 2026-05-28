@@ -11,7 +11,7 @@ import 'package:movies_app/features/Home/presentation/screens/tabs/home_tab.dart
 import 'package:movies_app/features/Home/presentation/screens/tabs/profile_tab.dart';
 import 'package:movies_app/features/Home/presentation/screens/tabs/search_tab.dart';
 import 'package:movies_app/features/Home/presentation/widgets/bottom_nav.dart';
-import 'package:movies_app/features/profile/cubit/tabs/tabs_cubit.dart';
+import 'package:movies_app/features/profile/presentation/cubit/tabs/tabs_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});

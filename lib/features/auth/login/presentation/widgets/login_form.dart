@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/core/utils/validators/auth_validator.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
 
@@ -29,10 +30,7 @@ class _LoginFormState extends State<LoginForm> {
           hintText: "Email",
           prefixIcon: Image.asset(AssetsManager.emailIcon),
           keyboardType: TextInputType.emailAddress,
-          validator: (value) {
-            if (value == null || value.isEmpty) return 'Email is required';
-            return null;
-          },
+          validator: AuthValidators.email
         ),
         SizedBox(height: 22.5.h),
         AppTextFormField(
@@ -49,10 +47,7 @@ class _LoginFormState extends State<LoginForm> {
                   : Icon(Icons.remove_red_eye),
             
           ),
-          validator: (value) {
-    if (value == null || value.isEmpty) return 'Password is required';
-            return null;
-          }
+          validator: AuthValidators.password
         )
       ],
     );

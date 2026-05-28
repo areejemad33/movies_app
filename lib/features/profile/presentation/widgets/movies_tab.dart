@@ -6,7 +6,7 @@ import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:movies_app/core/widgets/movie_card.dart';
 
 import '../../../Home/domain/entities/movie_entity.dart';
-import '../../cubit/profile/profile_cubit.dart';
+import '../cubit/profile/profile_cubit.dart';
 
 class MoviesTab extends StatelessWidget {
   final List<Map<String, dynamic>> movies;

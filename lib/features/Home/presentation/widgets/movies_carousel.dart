@@ -6,7 +6,7 @@ import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:movies_app/features/Home/data/models/movie_model.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
 import 'package:movies_app/features/Home/presentation/widgets/movie_poster_card.dart';
-import 'package:movies_app/features/profile/cubit/tabs/tabs_cubit.dart';
+import 'package:movies_app/features/profile/presentation/cubit/tabs/tabs_cubit.dart';
 
 class MoviesCarousel extends StatelessWidget {
   final List<MovieEntity> movies;
