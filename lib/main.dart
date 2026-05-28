@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeManager.darkTheme,
         onGenerateRoute: RouteGenerator.getRoute,
               initialRoute: seenOnboarding
-            ? RoutesManager.updateProfile
+            ? RoutesManager.login
 
       : RoutesManager.onBoarding,
 

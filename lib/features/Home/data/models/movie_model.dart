@@ -18,4 +18,11 @@ class MovieModel extends MovieEntity {
       rating: (json['rating'] ?? 0).toDouble(),
     );
   }
-}
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'poster': image,
+      'rating': rating,
+    };
+}}

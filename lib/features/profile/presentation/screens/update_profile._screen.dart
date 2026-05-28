@@ -9,8 +9,8 @@ import 'package:movies_app/features/profile/avatar_cubit.dart';
 import '../../../../core/resources/colors_manager.dart';
 import '../../../../core/routes/routes_manager.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
-import '../../cubit/update_profile_cubit.dart';
-import '../../cubit/update_profile_states.dart';
+import '../../cubit/profile/update_profile_cubit.dart';
+import '../../cubit/profile/update_profile_states.dart';
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});
 
@@ -66,11 +66,12 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
       listener: (context, state) {
         if (state is UpdateProfileSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
+             SnackBar(
               content: Text('Profile updated successfully!'),
               backgroundColor: Colors.green,
             ),
           );
+          Navigator.pop(context);
         }
         if (state is DeleteAccountSuccess) {
           Navigator.pushReplacementNamed(context, RoutesManager.login);
@@ -154,7 +155,7 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                       ),
                       SizedBox(height: 220.28.h),
 
-                      DeleteAccountButton(
+                    DeleteAccountButton(
                         text: 'Delete Account',
                         onPressed: state is DeleteAccountLoading
                             ? () {}

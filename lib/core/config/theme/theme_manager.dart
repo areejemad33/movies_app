@@ -25,6 +25,14 @@ class ThemeManager {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     ),
+    tabBarTheme: TabBarThemeData(
+      dividerColor: Colors.transparent,
+      indicatorColor: ColorsManager.yellow,
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: ColorsManager.white,
+      unselectedLabelColor: Colors.white,
+      labelStyle:GoogleFonts.roboto(fontWeight: .w400,fontSize: 20.sp, color:  ColorsManager.white),),
+
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: ColorsManager.black28,
       selectedItemColor: ColorsManager.yellow,

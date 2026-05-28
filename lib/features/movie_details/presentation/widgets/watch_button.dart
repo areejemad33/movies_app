@@ -3,7 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/resources/colors_manager.dart';
 
 class WatchButton extends StatelessWidget {
-  const WatchButton({super.key});
+  final VoidCallback? onPressed;
+
+  const WatchButton({
+    super.key,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +24,7 @@ class WatchButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.r),
             ),
           ),
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text('Watch', style: Theme.of(context).textTheme.labelLarge),
         ),
       ),

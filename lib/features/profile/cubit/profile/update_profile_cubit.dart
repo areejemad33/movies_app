@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/features/profile/cubit/update_profile_states.dart';
+import 'package:movies_app/features/profile/cubit/profile/update_profile_states.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileState> {
   UpdateProfileCubit() : super(UpdateProfileInitial());
