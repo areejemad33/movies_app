@@ -65,7 +65,7 @@ class _LoginViewState extends State<_LoginView> {
                   backgroundColor: Colors.green,
                 ),
               );
-              // Navigator.pushReplacementNamed(context, RoutesManager.home);
+               Navigator.pushReplacementNamed(context, RoutesManager.home);
             }
             if (state is LoginError) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -86,7 +86,7 @@ class _LoginViewState extends State<_LoginView> {
                   backgroundColor: Colors.green,
                 ),
               );
-              // Navigator.pushReplacementNamed(context, RoutesManager.home);
+               Navigator.pushReplacementNamed(context, RoutesManager.home);
             }
             if (state is GoogleAuthError) {
               ScaffoldMessenger.of(context).showSnackBar(
