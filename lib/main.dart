@@ -9,16 +9,19 @@ import 'package:movies_app/core/routes/routes_generator.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:movies_app/firebase_options.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await GoogleSignIn.instance.initialize();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  configureDependencies();
+  configureDependencies(); 
+
+
+
+  await GoogleSignIn.instance.initialize();
 
   final seenOnboarding = await PrefsManager.getSeenOnboarding();
   final isLoggedIn = PrefsManager.isLoggedIn();

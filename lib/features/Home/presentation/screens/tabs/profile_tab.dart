@@ -67,69 +67,79 @@ class _ProfileViewState extends State<_ProfileView> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly,
+                        
                             children: [
-                              Column(
-                                children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
                                   Image.asset(
-                                    AssetsManager.avatars[
-                                    int.parse(state.avatarId)],
-                                  ),
-                                  SizedBox(height: 15.h),
-                                  Text(
-                                    state.name,
-                                    style: GoogleFonts.roboto(
-                                      color: ColorsManager.white,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w700,
+                                  AssetsManager.avatars[
+                                    int.parse(state.avatarId)
+                                  ],
+                                  width: 118.w,
+                                  height: 118.h,
+                                  fit: BoxFit.contain,
+                                ),
+                                    SizedBox(height: 15.h),
+                                    Text(
+                                      state.name,
+                                      style: GoogleFonts.roboto(
+                                        color: ColorsManager.white,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                              SizedBox(width: 40.w,),
+
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      '${state.watchListCount}',
+                                      style: GoogleFonts.roboto(
+                                        color: ColorsManager.white,
+                                        fontSize: 36.sp,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(height: 20.h),
+                                    Text(
+                                      "Watch List",
+                                      style: GoogleFonts.roboto(
+                                        color: ColorsManager.white,
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
 
-                              Column(
-                                children: [
-                                  Text(
-                                    '${state.watchListCount}',
-                                    style: GoogleFonts.roboto(
-                                      color: ColorsManager.white,
-                                      fontSize: 36.sp,
-                                      fontWeight: FontWeight.w700,
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      '${state.historyCount}',
+                                      style: GoogleFonts.roboto(
+                                        color: ColorsManager.white,
+                                        fontSize: 36.sp,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  Text(
-                                    "Watch List",
-                                    style: GoogleFonts.roboto(
-                                      color: ColorsManager.white,
-                                      fontSize: 24.sp,
-                                      fontWeight: FontWeight.w700,
+                                    SizedBox(height: 20.h),
+                                    Text(
+                                      "History",
+                                      style: GoogleFonts.roboto(
+                                        color: ColorsManager.white,
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-
-                              Column(
-                                children: [
-                                  Text(
-                                    '${state.historyCount}',
-                                    style: GoogleFonts.roboto(
-                                      color: ColorsManager.white,
-                                      fontSize: 36.sp,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  SizedBox(height: 20.h),
-                                  Text(
-                                    "History",
-                                    style: GoogleFonts.roboto(
-                                      color: ColorsManager.white,
-                                      fontSize: 24.sp,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           ),

@@ -67,7 +67,7 @@ class _SearchTabState extends State<SearchTab> {
                   .searchController.text.isEmpty) {
                 return Center(
     child: Image.asset(
-      AssetsManager.emptySearch,
+      AssetsManager.empty,
       width: 124.w,
     ),
         );

@@ -13,3 +13,9 @@ class TabsError extends TabsState {
   final String message;
   TabsError(this.message);
 }
+
+class WatchListUpdated extends TabsState {
+  final bool isBookmarked;
+
+  WatchListUpdated(this.isBookmarked);
+}

@@ -12,6 +12,8 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:movies_app/core/api/api_manager.dart' as _i784;
+import 'package:movies_app/features/auth/login/cubit/sign_in_with_google_cubit.dart'
+    as _i203;
 import 'package:movies_app/features/Home/data/data_sources/home_remote_data_source.dart'
     as _i585;
 import 'package:movies_app/features/Home/data/data_sources/search_remote_data_source.dart'
@@ -56,6 +58,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i203.GoogleAuthCubit>(() => _i203.GoogleAuthCubit());
     gh.lazySingleton<_i784.ApiManager>(() => _i784.ApiManager());
     gh.factory<_i585.HomeRemoteDataSource>(
       () => _i585.HomeRemoteDataSource(gh<_i784.ApiManager>()),

@@ -1,11 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/core/resources/assets_manager.dart';
 import 'package:movies_app/core/routes/routes_manager.dart';
 import 'package:movies_app/core/widgets/movie_card.dart';
 import 'package:movies_app/features/Home/domain/entities/movie_entity.dart';
-import 'package:movies_app/core/widgets/rating_badge.dart';
 import 'package:movies_app/features/movie_details/domain/entities/movie_details_entity.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/heading_text.dart';
 

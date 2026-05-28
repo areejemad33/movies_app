@@ -86,130 +86,129 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
         }
       },
       builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text('Update Profile',
-                  style: Theme.of(context).textTheme.titleMedium),
-            ),
-            body: Padding(
-              padding: REdgeInsets.symmetric(vertical: 33.56.h, horizontal: 16.w),
-              child: Form(
-                key: _formKey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      InkWell(
-                        onTap: () => buildAvatarSelector(context),
-                        child: Image.asset(
-                          AssetsManager.avatars[int.parse(_selectedAvatarId)],
-                          width: 100,
-                          height: 100,
-                        ),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Pick Avatar',
+                style: Theme.of(context).textTheme.titleMedium),
+          ),
+          body: Padding(
+            padding: REdgeInsets.symmetric(vertical: 33.56.h, horizontal: 16.w),
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () => buildAvatarSelector(context),
+                      child: Image.asset(
+                        AssetsManager.avatars[int.parse(_selectedAvatarId)],
+                        width: 150.h,
+                        height: 150.h,
+                        fit:  BoxFit.contain,
                       ),
-                      SizedBox(height: 35.h),
-
-                      AppTextFormField(
-                        controller: _nameController,
-                        prefixIcon: Image.asset(AssetsManager.profileIcon),
-                        hintText: 'Name',
-                        validator: (value) {
-                          if (value == null || value.isEmpty)
-                            return 'Name is required';
-                          return null;
+                    ),
+                    SizedBox(height: 35.h),
+        
+                    AppTextFormField(
+                      controller: _nameController,
+                      prefixIcon: Image.asset(AssetsManager.profileIcon),
+                      hintText: 'Name',
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                          return 'Name is required';
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 19.28.h),
+        
+                    AppTextFormField(
+                      controller: _phoneController,
+                      hintText: 'Phone',
+                      prefixIcon: Image.asset(AssetsManager.phoneIcon),
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty)
+                          return 'Phone is required';
+                        if (!RegExp(r'^01[0125][0-9]{8}$').hasMatch(value))
+                          return 'Enter a valid Egyptian phone number';
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 30.28.h),
+        
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                              context, RoutesManager.resetPassword);
                         },
-                      ),
-                      SizedBox(height: 19.28.h),
-
-                      AppTextFormField(
-                        controller: _phoneController,
-                        hintText: 'Phone',
-                        prefixIcon: Image.asset(AssetsManager.phoneIcon),
-                        keyboardType: TextInputType.phone,
-                        validator: (value) {
-                          if (value == null || value.isEmpty)
-                            return 'Phone is required';
-                          if (!RegExp(r'^01[0125][0-9]{8}$').hasMatch(value))
-                            return 'Enter a valid Egyptian phone number';
-                          return null;
-                        },
-                      ),
-                      SizedBox(height: 30.28.h),
-
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, RoutesManager.resetPassword);
-                          },
-                          child: Text(
-                            'Reset Password',
-                            style: GoogleFonts.roboto(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w400,
-                              color: ColorsManager.white,
-                            ),
+                        child: Text(
+                          'Reset Password',
+                          style: GoogleFonts.roboto(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w400,
+                            color: ColorsManager.white,
                           ),
                         ),
                       ),
-                      SizedBox(height: 220.28.h),
-
-                    DeleteAccountButton(
-                        text: 'Delete Account',
-                        onPressed: state is DeleteAccountLoading
-                            ? () {}
-                            : () {
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: const Text('Delete Account'),
-                              content: const Text(
-                                  'Are you sure you want to delete your account?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('Cancel'),
+                    ),
+                    SizedBox(height: 220.28.h),
+        
+                  DeleteAccountButton(
+                      text: 'Delete Account',
+                      onPressed: state is DeleteAccountLoading
+                          ? () {}
+                          : () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: const Text('Delete Account'),
+                            content: const Text(
+                                'Are you sure you want to delete your account?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<UpdateProfileCubit>()
+                                      .deleteAccount();
+                                },
+                                child: const Text(
+                                  'Delete',
+                                  style: TextStyle(color: Colors.red),
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    context
-                                        .read<UpdateProfileCubit>()
-                                        .deleteAccount();
-                                  },
-                                  child: const Text(
-                                    'Delete',
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 19.h),
+        
+                    AppButton(
+                      text: state is UpdateProfileLoading
+                          ? 'Loading...'
+                          : 'Update Data',
+                      onPressed: state is UpdateProfileLoading
+                          ? () {}
+                          : () {
+                        if (_formKey.currentState!.validate()) {
+                          context
+                              .read<UpdateProfileCubit>()
+                              .updateProfile(
+                            name: _nameController.text.trim(),
+                            phone: _phoneController.text.trim(),
+                            avatarId: _selectedAvatarId,
                           );
-                        },
-                      ),
-                      SizedBox(height: 19.h),
-
-                      AppButton(
-                        text: state is UpdateProfileLoading
-                            ? 'Loading...'
-                            : 'Update Data',
-                        onPressed: state is UpdateProfileLoading
-                            ? () {}
-                            : () {
-                          if (_formKey.currentState!.validate()) {
-                            context
-                                .read<UpdateProfileCubit>()
-                                .updateProfile(
-                              name: _nameController.text.trim(),
-                              phone: _phoneController.text.trim(),
-                              avatarId: _selectedAvatarId,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),

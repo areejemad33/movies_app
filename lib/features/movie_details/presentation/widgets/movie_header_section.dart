@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies_app/core/resources/colors_manager.dart';
 import 'package:movies_app/features/movie_details/domain/entities/movie_details_entity.dart';
+import 'package:movies_app/features/movie_details/presentation/widgets/bookmark_button.dart';
 
 class MovieHeaderSection extends StatelessWidget {
   const MovieHeaderSection({super.key, required this.movie});
@@ -60,14 +61,7 @@ class MovieHeaderSection extends StatelessWidget {
                           size: 30,
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.bookmark_rounded,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
+                    BookmarkButton(movie: movie),
                     ],
                   ),
 

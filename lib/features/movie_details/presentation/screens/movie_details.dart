@@ -12,6 +12,7 @@ import 'package:movies_app/features/movie_details/presentation/widgets/screensho
 import 'package:movies_app/features/movie_details/presentation/widgets/similar_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/summary_section.dart';
 import 'package:movies_app/features/movie_details/presentation/widgets/watch_button.dart';
+import 'package:movies_app/features/profile/cubit/tabs/tabs_cubit.dart';
 
 
 class MovieDetails extends StatefulWidget {
@@ -30,19 +31,25 @@ class _MovieDetailsState extends State<MovieDetails> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<MovieDetailsCubit>().getMovieDetails(widget.movieId);
-        context.read<MovieDetailsCubit>().getSimilarMovies(widget.movieId);
+
+      context
+          .read<MovieDetailsCubit>()
+          .getSimilarMovies(widget.movieId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: const Color(0xFF121312),
-          body: _buildBody(state),
-        );
-      },
+    return BlocProvider(
+      create: (_) => TabsCubit(),
+      child: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: const Color(0xFF121312),
+            body: _buildBody(state),
+          );
+        },
+      ),
     );
   }
 
@@ -72,7 +79,9 @@ class _MovieDetailsState extends State<MovieDetails> {
             /// HEADER
             MovieHeaderSection(movie: movie),
 
-            const WatchButton(),
+          WatchButton(
+    onPressed: (){},
+),
 
             SizedBox(height: 16.h),
 

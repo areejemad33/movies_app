@@ -39,7 +39,6 @@ class AssetsManager {
   static const String watchListIcon = "assets/icons/watch_list_icon.png";
   static const String historyIcon = "assets/icons/history.png";
 
-  static const String empty_profile = "assets/images/empty_profile.png";
 
   static const String availableNow = 'assets/images/available_now_text.png';
   static const String watchNow = 'assets/images/watch_now_text.png';
@@ -51,7 +50,7 @@ class AssetsManager {
   static const String starIcon = 'assets/icons/star_icon.png';
 
 
-  static const String emptySearch = 'assets/images/empty_search.png';
+  static const String empty = 'assets/images/empty_search.png';
 
   
   static const String favoritIcon = 'assets/icons/movie_details/favorit.png';

@@ -37,35 +37,46 @@ class AppButton extends StatelessWidget {
           elevation: 0,
           backgroundColor: backgroundColor ?? ColorsManager.yellow,
           foregroundColor: textColor ?? ColorsManager.black,
-
           side: borderSide,
-
+          disabledBackgroundColor:
+              (backgroundColor ?? ColorsManager.yellow).withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.r),
           ),
         ),
-        child: isLoading
-            ? const CircularProgressIndicator()
-            : icon == null
-                ? Text(
-                    text,
-                    style:
-                        textStyle ??
-                        Theme.of(context).textTheme.headlineLarge,
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      icon!,
-                      SizedBox(width: 10.w),
-                      Text(
-                        text,
-                        style:
-                            textStyle ??
-                            Theme.of(context).textTheme.displaySmall,
-                      ),
-                    ],
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: isLoading
+              ? SizedBox(
+                  key: const ValueKey("loader"),
+                  height: 20.h,
+                  width: 20.h,
+                  child: const CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.black,
                   ),
+                )
+              : icon == null
+                  ? Text(
+                      text,
+                      key: const ValueKey("text"),
+                      style: textStyle ??
+                          Theme.of(context).textTheme.headlineLarge,
+                    )
+                  : Row(
+                      key: const ValueKey("icon_text"),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        icon!,
+                        SizedBox(width: 10.w),
+                        Text(
+                          text,
+                          style: textStyle ??
+                              Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ],
+                    ),
+        ),
       ),
     );
   }

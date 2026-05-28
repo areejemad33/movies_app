@@ -13,7 +13,6 @@ import 'package:movies_app/features/auth/reset_password/presentation/screens/res
 import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart';
 import 'package:movies_app/features/movie_details/presentation/screens/movie_details.dart';
 
-import '../../features/Home/domain/entities/movie_entity.dart';
 
 import '../../features/onBoarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/presentation/screens/update_profile._screen.dart';
