@@ -15,6 +15,8 @@ class ColorsManager {
   static const Color black28= Color(0xFF282A28);
 
   static const Color white = Color(0xFFFFFFFF);
+  static const Color black21 = Color(0xFF212121);
+
 
 
   static const Color onboardingGreen = Color(0xFF084250);

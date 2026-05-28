@@ -19,9 +19,11 @@ class FilmCardList extends StatelessWidget {
         itemBuilder: (context, index) {
           final movie = movies[index];
 
+
           return Container(
             width: 160.w,
             margin: const EdgeInsets.only(left: 16),
+
 
             child: MovieCard(
               movie: movie,

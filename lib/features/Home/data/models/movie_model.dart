@@ -19,4 +19,11 @@ class MovieModel extends MovieEntity {
     
     );
   }
-}
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'poster': image,
+      'rating': rating,
+    };
+}}

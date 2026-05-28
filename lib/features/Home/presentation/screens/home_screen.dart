@@ -44,21 +44,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         bottom: false,
-      child: Scaffold(
+      child: SafeArea(
+        child: Scaffold(
+          
+          extendBody: true,
         
-        extendBody: true,
-      
-        body: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            return tabs[state.bottomNavIndex];
-          },
-        ),
-      
-        bottomNavigationBar: BottomNav(
-          currentIndex: context.watch<HomeCubit>().state.bottomNavIndex,
-          onTap: (index) {
-            context.read<HomeCubit>().changeBottomNav(index);
-          },
+          body: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return tabs[state.bottomNavIndex];
+            },
+          ),
+        
+          bottomNavigationBar: BottomNav(
+            currentIndex: context.watch<HomeCubit>().state.bottomNavIndex,
+            onTap: (index) {
+              context.read<HomeCubit>().changeBottomNav(index);
+            },
+          ),
         ),
       ),
     );

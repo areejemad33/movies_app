@@ -13,6 +13,8 @@ import 'package:movies_app/features/auth/reset_password/presentation/screens/res
 import 'package:movies_app/features/movie_details/presentation/cubit/movie_details_cubit.dart';
 import 'package:movies_app/features/movie_details/presentation/screens/movie_details.dart';
 
+import '../../features/Home/domain/entities/movie_entity.dart';
+
 import '../../features/onBoarding/presentation/screens/onboarding_screen.dart';
 import '../../features/profile/presentation/screens/update_profile._screen.dart';
 import 'routes_manager.dart';
@@ -28,8 +30,8 @@ class RouteGenerator {
           builder: (_) => const LoginScreen(),
         );
 
-    
-  
+
+
       case RoutesManager.register:
         return MaterialPageRoute(
           builder: (_) =>  RegisterScreen(),
@@ -55,8 +57,8 @@ case RoutesManager.home:
         return MaterialPageRoute(
           builder: (_) => const UpdateProfileScreen(),
         );
-    
 
+    
 
          case RoutesManager.movieDetails:
   final movieId = settings.arguments as int;

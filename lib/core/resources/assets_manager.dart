@@ -33,6 +33,13 @@ class AssetsManager {
   static const String exploreIcon = "assets/icons/explore_icon.png";
   static const String profileIcon = "assets/icons/profile_icon.png";
   static const String googleIcon = "assets/icons/🦆 icon _google_.svg";
+  static const String exitIcon = "assets/icons/exit_icon.png";
+  static const String lineIcon = "assets/icons/line_icon.png";
+  static const String arrowIcon = "assets/icons/arrow._icon.png";
+  static const String watchListIcon = "assets/icons/watch_list_icon.png";
+  static const String historyIcon = "assets/icons/history.png";
+
+  static const String empty_profile = "assets/images/empty_profile.png";
 
   static const String availableNow = 'assets/images/available_now_text.png';
   static const String watchNow = 'assets/images/watch_now_text.png';
