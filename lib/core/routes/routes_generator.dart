@@ -4,9 +4,9 @@ import 'package:movies_app/core/di/dependency_injection.dart';
 
 import 'package:movies_app/features/Home/presentation/cubit/home/home_cubit.dart';
 import 'package:movies_app/features/Home/presentation/screens/home_screen.dart';
-import 'package:movies_app/features/auth/login/presentation/screens/login_screen.dart';
-import 'package:movies_app/features/auth/register/presentation/screens/register_screen.dart';
-import 'package:movies_app/features/auth/reset_password/presentation/screens/reset_password_screen.dart';
+import 'package:movies_app/features/auth/presentation/login/screens/login_screen.dart';
+import 'package:movies_app/features/auth/presentation/register/screens/register_screen.dart';
+import 'package:movies_app/features/auth/presentation/reset_password/screens/reset_password_screen.dart';
 
 
 
@@ -48,6 +48,7 @@ case RoutesManager.home:
     ),
   );
 
+  
       case RoutesManager.onBoarding:
         return MaterialPageRoute(
           builder: (_) => const OnboardingScreen(),

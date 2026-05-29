@@ -25,29 +25,33 @@ class OnboardingPage extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Image.asset(
-          onboardingModel.image,
-        fit: BoxFit.cover,
-      
-alignment: Alignment.topCenter,
-        ),
 
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                onboardingModel.color.withOpacity(0.0),
-                onboardingModel.color.withOpacity(0.5),
-                onboardingModel.color.withOpacity(0.91),
-                onboardingModel.color.withOpacity(1.0),
-              ],
-              stops: const [0.0, 0.5, 0.91, 1.0],
-            ),
-          ),
-        ),
-        
+ Image.asset(
+      onboardingModel.image,
+      fit: BoxFit.fill,
+      alignment: Alignment.topCenter,
+    ),
+
+    Container(
+  decoration: BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Colors.transparent,
+
+        onboardingModel.color.withOpacity(0.4),
+
+        onboardingModel.color.withOpacity(0.75),
+
+        onboardingModel.color.withOpacity(0.95),
+
+        onboardingModel.color,
+      ],
+      stops: const [0.0, 0.3, 0.6, 0.85, 1.0],
+    ),
+  ),
+),
 
         Align(
           alignment: Alignment.bottomCenter,
@@ -64,7 +68,7 @@ alignment: Alignment.topCenter,
             child:Column(
   mainAxisSize: MainAxisSize.min,
   children: [
-    SizedBox(height: 18.h),
+    SizedBox(height: 7.h),
 
     Text(
       onboardingModel.title,
@@ -74,7 +78,7 @@ alignment: Alignment.topCenter,
 
     if (onboardingModel.subTitle != null &&
         onboardingModel.subTitle!.isNotEmpty) ...[
-      SizedBox(height: 24.h),
+      SizedBox(height: 8.h),
 
       Text(
         onboardingModel.subTitle!,
@@ -83,7 +87,7 @@ alignment: Alignment.topCenter,
       ),
     ],
 
-    SizedBox(height: 24.h),
+    SizedBox(height: 16.h),
 
     AppButton(
       text: title,

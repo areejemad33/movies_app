@@ -15,20 +15,28 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:movies_app/core/api/api_manager.dart' as _i784;
 import 'package:movies_app/core/di/firebase_module.dart' as _i640;
-import 'package:movies_app/features/auth/login/cubit/sign_in_with_google_cubit.dart'
-    as _i203;
-import 'package:movies_app/features/auth/register/data/data_sources/auth_remote_datasource.dart'
-    as _i584;
-import 'package:movies_app/features/auth/register/data/data_sources/auth_remote_datasource_impl.dart'
-    as _i180;
-import 'package:movies_app/features/auth/register/data/repositeries_impl.dart/auth_repositery_impl.dart'
-    as _i284;
-import 'package:movies_app/features/auth/register/domain/repositeries/auth_repositery.dart'
-    as _i42;
-import 'package:movies_app/features/auth/register/domain/usecases/register_usecase.dart'
-    as _i1012;
-import 'package:movies_app/features/auth/register/presentation/cubit/register_cubit.dart'
-    as _i500;
+import 'package:movies_app/features/auth/data/data_sources/auth_remote_data_source.dart'
+    as _i510;
+import 'package:movies_app/features/auth/data/data_sources/auth_remote_data_source_impl.dart'
+    as _i3;
+import 'package:movies_app/features/auth/data/repositeries_impl/auth_repositery_impl.dart'
+    as _i259;
+import 'package:movies_app/features/auth/domain/repositeries/auth_repositery.dart'
+    as _i250;
+import 'package:movies_app/features/auth/domain/usecases/login_use_case.dart'
+    as _i158;
+import 'package:movies_app/features/auth/domain/usecases/register_usecase.dart'
+    as _i3;
+import 'package:movies_app/features/auth/domain/usecases/reset_password_use_case.dart'
+    as _i992;
+import 'package:movies_app/features/auth/presentation/login/cubit/login_cubit.dart'
+    as _i803;
+import 'package:movies_app/features/auth/presentation/login/cubit/sign_in_with_google_cubit.dart'
+    as _i141;
+import 'package:movies_app/features/auth/presentation/register/cubit/register_cubit.dart'
+    as _i392;
+import 'package:movies_app/features/auth/presentation/reset_password/cubit/reset_password_cubit.dart'
+    as _i738;
 import 'package:movies_app/features/Home/data/data_sources/home_remote_data_source.dart'
     as _i585;
 import 'package:movies_app/features/Home/data/data_sources/search_remote_data_source.dart'
@@ -75,10 +83,16 @@ import 'package:movies_app/features/profile/domain/repositeries/profile_reposite
     as _i1056;
 import 'package:movies_app/features/profile/domain/usecases/delete_account_usecase.dart'
     as _i24;
+import 'package:movies_app/features/profile/domain/usecases/get_profile_usecase.dart'
+    as _i131;
 import 'package:movies_app/features/profile/domain/usecases/get_user_data_usecase.dart'
     as _i73;
+import 'package:movies_app/features/profile/domain/usecases/sign_out_use_case.dart'
+    as _i758;
 import 'package:movies_app/features/profile/domain/usecases/update_profile_usecase.dart'
     as _i325;
+import 'package:movies_app/features/profile/presentation/cubit/profile/profile_cubit.dart'
+    as _i101;
 import 'package:movies_app/features/profile/presentation/cubit/profile/update_profile_cubit.dart'
     as _i938;
 
@@ -90,12 +104,12 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final firebaseModule = _$FirebaseModule();
-    gh.factory<_i203.GoogleAuthCubit>(() => _i203.GoogleAuthCubit());
+    gh.factory<_i141.GoogleAuthCubit>(() => _i141.GoogleAuthCubit());
     gh.lazySingleton<_i784.ApiManager>(() => _i784.ApiManager());
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.auth);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
-    gh.lazySingleton<_i584.AuthRemoteDataSource>(
-      () => _i180.AuthRemoteDataSourceImpl(
+    gh.lazySingleton<_i510.AuthRemoteDataSource>(
+      () => _i3.AuthRemoteDataSourceImpl(
         firebaseAuth: gh<_i59.FirebaseAuth>(),
         firestore: gh<_i974.FirebaseFirestore>(),
       ),
@@ -118,11 +132,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i708.MovieDetailsRemoteDataSource>(
       () => _i708.MovieDetailsRemoteDataSource(gh<_i784.ApiManager>()),
     );
-    gh.lazySingleton<_i42.AuthRepository>(
-      () => _i284.AuthRepositoryImpl(gh<_i584.AuthRemoteDataSource>()),
-    );
     gh.factory<_i104.HomeRepository>(
       () => _i755.HomeRepositoryImpl(gh<_i585.HomeRemoteDataSource>()),
+    );
+    gh.lazySingleton<_i250.AuthRepository>(
+      () => _i259.AuthRepositoryImpl(gh<_i510.AuthRemoteDataSource>()),
     );
     gh.factory<_i414.SearchRepository>(
       () => _i534.SearchRepositoryImpl(gh<_i579.SearchRemoteDataSource>()),
@@ -135,6 +149,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i325.UpdateProfileUseCase>(
       () => _i325.UpdateProfileUseCase(gh<_i1056.ProfileRepository>()),
+    );
+    gh.factory<_i131.GetProfileUseCase>(
+      () => _i131.GetProfileUseCase(gh<_i1056.ProfileRepository>()),
+    );
+    gh.factory<_i758.SignOutUseCase>(
+      () => _i758.SignOutUseCase(gh<_i1056.ProfileRepository>()),
     );
     gh.factory<_i525.MovieDetailsRepositery>(
       () => _i310.MovieDetailsRepositoryImpl(
@@ -160,17 +180,29 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i24.DeleteAccountUseCase>(),
       ),
     );
-    gh.lazySingleton<_i1012.RegisterUseCase>(
-      () => _i1012.RegisterUseCase(gh<_i42.AuthRepository>()),
-    );
-    gh.factory<_i500.RegisterCubit>(
-      () => _i500.RegisterCubit(gh<_i1012.RegisterUseCase>()),
-    );
     gh.factory<_i747.GetLatestMoviesUseCase>(
       () => _i747.GetLatestMoviesUseCase(gh<_i104.HomeRepository>()),
     );
     gh.factory<_i391.GetMoviesByGenreUseCase>(
       () => _i391.GetMoviesByGenreUseCase(gh<_i104.HomeRepository>()),
+    );
+    gh.factory<_i992.ResetPasswordUseCase>(
+      () => _i992.ResetPasswordUseCase(gh<_i250.AuthRepository>()),
+    );
+    gh.lazySingleton<_i158.LoginUseCase>(
+      () => _i158.LoginUseCase(gh<_i250.AuthRepository>()),
+    );
+    gh.lazySingleton<_i3.RegisterUseCase>(
+      () => _i3.RegisterUseCase(gh<_i250.AuthRepository>()),
+    );
+    gh.factory<_i101.ProfileCubit>(
+      () => _i101.ProfileCubit(
+        gh<_i131.GetProfileUseCase>(),
+        gh<_i758.SignOutUseCase>(),
+      ),
+    );
+    gh.factory<_i392.RegisterCubit>(
+      () => _i392.RegisterCubit(gh<_i3.RegisterUseCase>()),
     );
     gh.factory<_i653.BrowseCubit>(
       () => _i653.BrowseCubit(gh<_i391.GetMoviesByGenreUseCase>()),
@@ -186,6 +218,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i342.GetMovieDetailsUseCase>(),
         gh<_i256.GetSimilarMoviesUseCase>(),
       ),
+    );
+    gh.factory<_i803.LoginCubit>(
+      () => _i803.LoginCubit(gh<_i158.LoginUseCase>()),
+    );
+    gh.factory<_i738.ResetPasswordCubit>(
+      () => _i738.ResetPasswordCubit(gh<_i992.ResetPasswordUseCase>()),
     );
     return this;
   }

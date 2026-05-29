@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/features/profile/data/data_sources/profile_remote_data_source.dart';
-import 'package:movies_app/features/profile/domain/entities/user_entity.dart';
+import 'package:movies_app/features/profile/domain/entities/profile_entity.dart';
+import 'package:movies_app/features/profile/domain/entities/update_profile_entity.dart';
 import 'package:movies_app/features/profile/domain/repositeries/profile_repositery.dart';
 
 @LazySingleton(as: ProfileRepository)
@@ -12,18 +13,23 @@ class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRepositoryImpl(this.remote);
 
   @override
-  Future<UserEntity> getUserData() async {
-    final data = await remote.getUserData();
 
-    return UserEntity(
-      name: data['name'] ?? '',
-      phone: data['phone'] ?? '',
-      avatarId: data['avatarId'] ?? '0',
-    );
-  }
+Future<ProfileEntity> getUserData() async {
 
+  final data = await remote.getUserData();
+
+  return ProfileEntity(
+    name: data['name'] ?? '',
+    phone: data['phone'] ?? '',
+    avatarId: data['avatarId'] ?? '0',
+    watchListCount:
+        data['watchListCount'] ?? 0,
+    historyCount:
+        data['historyCount'] ?? 0,
+  );
+}
   @override
-  Future<void> updateProfile(UserEntity user) {
+  Future<void> updateProfile(UpdateProfileEntity user) {
     return remote.updateProfile({
       'name': user.name,
       'phone': user.phone,
@@ -59,4 +65,10 @@ Future<void> deleteAccount() async {
     );
   }
 }
+
+
+  @override
+  Future<void> signOut() {
+    return remote.signOut();
+  }
 }

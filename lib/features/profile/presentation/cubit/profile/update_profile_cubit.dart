@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movies_app/features/profile/domain/entities/user_entity.dart';
+import 'package:movies_app/features/profile/domain/entities/update_profile_entity.dart';
 import 'package:movies_app/features/profile/domain/usecases/delete_account_usecase.dart';
 import 'package:movies_app/features/profile/domain/usecases/get_user_data_usecase.dart';
 import 'package:movies_app/features/profile/domain/usecases/update_profile_usecase.dart';
@@ -47,12 +47,12 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
 
   try {
     await updateProfile(
-      UserEntity(
-        name: name,
-        phone: phone,
-        avatarId: avatarId,
-      ),
-    );
+  UpdateProfileEntity(
+    name: name,
+    phone: phone,
+    avatarId: avatarId,
+  ),
+);
 
     emit(UpdateProfileSuccess());
   } catch (e) {

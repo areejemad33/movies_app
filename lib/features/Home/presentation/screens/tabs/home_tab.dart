@@ -53,6 +53,7 @@ class HomeTab extends StatelessWidget {
     
               FilmsHeading(
                 title: state.selectedGenre,
+                
               ),
     
               SizedBox(height: 15.h),

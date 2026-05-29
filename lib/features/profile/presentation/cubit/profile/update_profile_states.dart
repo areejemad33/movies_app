@@ -1,4 +1,4 @@
-import 'package:movies_app/features/profile/domain/entities/user_entity.dart';
+import 'package:movies_app/features/profile/domain/entities/profile_entity.dart';
 
 sealed class UpdateProfileState {}
 
@@ -20,7 +20,7 @@ class UpdateProfileError extends UpdateProfileState {
 class LoadProfileLoading extends UpdateProfileState {}
 
 class LoadProfileSuccess extends UpdateProfileState {
-  final UserEntity user;
+  final ProfileEntity user;
 
   LoadProfileSuccess(this.user);
 }

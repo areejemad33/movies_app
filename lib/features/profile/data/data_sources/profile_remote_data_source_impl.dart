@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movies_app/features/profile/data/data_sources/profile_remote_data_source.dart';
+import 'package:movies_app/features/profile/data/models/profile_model.dart';
 @LazySingleton(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   final FirebaseFirestore firestore;
@@ -30,5 +31,24 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
     await firestore.collection('users').doc(uid).delete();
     await auth.currentUser!.delete();
+  }
+
+
+    @override
+  Future<ProfileModel> getProfile() async {
+
+    final doc = await firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .get();
+
+    return ProfileModel.fromJson(
+      doc.data()!,
+    );
+  }
+
+  @override
+  Future<void> signOut() async {
+    await auth.signOut();
   }
 }

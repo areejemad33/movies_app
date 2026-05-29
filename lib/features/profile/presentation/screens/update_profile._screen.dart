@@ -33,18 +33,11 @@ class _UpdateProfileView extends StatefulWidget {
   const _UpdateProfileView();
 
   @override
-  State<_UpdateProfileView> createState() =>
-    
-      _UpdateProfileViewState();
+  State<_UpdateProfileView> createState() => _UpdateProfileViewState();
 }
 
-
-class _UpdateProfileViewState
-    extends State<_UpdateProfileView> {
-      
-
-  final GlobalKey<FormState> _formKey =
-      GlobalKey<FormState>();
+class _UpdateProfileViewState extends State<_UpdateProfileView> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -60,33 +53,20 @@ class _UpdateProfileViewState
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<
-        UpdateProfileCubit,
-        UpdateProfileState>(
+    return BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
       listener: (context, state) {
 
+        /// Load profile success → fill data once only
         if (state is LoadProfileSuccess) {
-
-          _nameController.text =
-              state.user.name;
-
-          _phoneController.text =
-              state.user.phone;
-
-          _selectedAvatarId =
-              state.user.avatarId;
-
-          setState(() {});
+          _nameController.text = state.user.name;
+          _phoneController.text = state.user.phone;
+          _selectedAvatarId = state.user.avatarId;
         }
 
         if (state is UpdateProfileSuccess) {
-
-          ScaffoldMessenger.of(context)
-              .showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text(
-                'Profile updated successfully!',
-              ),
+              content: Text('Profile updated successfully!'),
               backgroundColor: Colors.green,
             ),
           );
@@ -95,7 +75,6 @@ class _UpdateProfileViewState
         }
 
         if (state is DeleteAccountSuccess) {
-
           Navigator.pushReplacementNamed(
             context,
             RoutesManager.login,
@@ -103,9 +82,7 @@ class _UpdateProfileViewState
         }
 
         if (state is UpdateProfileError) {
-
-          ScaffoldMessenger.of(context)
-              .showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.message),
               backgroundColor: Colors.red,
@@ -116,167 +93,133 @@ class _UpdateProfileViewState
 
       builder: (context, state) {
 
-        return Scaffold(
-
-          appBar: AppBar(
-            title: Text(
-              'Pick Avatar',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium,
+        /// 🔥 FULL LOADING SCREEN BEFORE DATA ARRIVES
+        if (state is UpdateProfileLoading ||
+            state is LoadProfileLoading ||
+            state is UpdateProfileInitial) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
+          );
+        }
 
-          body: Padding(
-            padding: REdgeInsets.symmetric(
-              vertical: 33.56.h,
-              horizontal: 16.w,
+        /// 🔥 ONLY SHOW UI AFTER DATA IS READY
+        if (state is LoadProfileSuccess) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Pick Avatar',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
 
-            child: Form(
-              key: _formKey,
+            body: Padding(
+              padding: REdgeInsets.symmetric(
+                vertical: 33.56.h,
+                horizontal: 16.w,
+              ),
 
-              child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
 
-                child: Column(
-                  children: [
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
 
-                    /// avatar
-                    ProfileAvatar(
-                      avatarId: _selectedAvatarId,
-
-                      onTap: () {
-
-                        showModalBottomSheet(
-                          backgroundColor:
-                              Colors.transparent,
-
-                          context: context,
-
-                          builder: (_) =>
-                            AvatarBottomSheet(
-  selectedAvatarId: _selectedAvatarId,
-
-  onAvatarSelected: (avatarId) {
-
-    setState(() {
-      _selectedAvatarId = avatarId;
-    });
-  },
-)
-                        );
-                      },
-                    ),
-
-                    SizedBox(height: 35.h),
-
-                    /// form
-                    ProfileForm(
-                      nameController:
-                          _nameController,
-
-                      phoneController:
-                          _phoneController,
-                    ),
-
-                    SizedBox(height: 30.h),
-
-                    /// reset password
-                    ResetPasswordButton(
-                      onPressed: () {
-
-                        Navigator.pushNamed(
-                          context,
-                          RoutesManager
-                              .resetPassword,
-                        );
-                      },
-                    ),
-
-                    SizedBox(height: 220.h),
-
-                    /// delete account
-                    DeleteAccountButton(
-
-                      text: 'Delete Account',
-
-                      isLoading:
-                          state is DeleteAccountLoading,
-
-                      onPressed:
-                          state is DeleteAccountLoading
-                              ? () {}
-                              : () {
-
-                          showDialog(
+                      /// avatar
+                      ProfileAvatar(
+                        avatarId: _selectedAvatarId,
+                        onTap: () {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
                             context: context,
-
-                            builder: (_) =>
-                                DeleteAccountDialog(
-
-                              onDelete: () {
-
-                                Navigator.pop(
-                                    context);
-
-                                context
-                                    .read<
-                                        UpdateProfileCubit>()
-                                    .delete();
+                            builder: (_) => AvatarBottomSheet(
+                              selectedAvatarId: _selectedAvatarId,
+                              onAvatarSelected: (avatarId) {
+                                setState(() {
+                                  _selectedAvatarId = avatarId;
+                                });
                               },
                             ),
                           );
                         },
-                    ),
+                      ),
 
-                    SizedBox(height: 19.h),
+                      SizedBox(height: 35.h),
 
-                    /// update button
-                    AppButton(
+                      /// form
+                      ProfileForm(
+                        nameController: _nameController,
+                        phoneController: _phoneController,
+                      ),
 
-                      text:
-                          state
-                                  is UpdateProfileLoading
-                              ? 'Loading...'
-                              : 'Update Data',
+                      SizedBox(height: 30.h),
 
-                      onPressed:
-                          state
-                                  is UpdateProfileLoading
-                              ? () {}
-                              : () {
-
-                          if (_formKey
-                              .currentState!
-                              .validate()) {
-
-                            context
-                                .read<
-                                    UpdateProfileCubit>()
-                                .updateProfileData(
-
-                                  name:
-                                      _nameController
-                                          .text
-                                          .trim(),
-
-                                  phone:
-                                      _phoneController
-                                          .text
-                                          .trim(),
-
-                                  avatarId:
-                                      _selectedAvatarId,
-                                );
-                          }
+                      /// reset password
+                      ResetPasswordButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            RoutesManager.resetPassword,
+                          );
                         },
-                    ),
-                  ],
+                      ),
+
+                      SizedBox(height: 220.h),
+
+                      /// delete account
+                      DeleteAccountButton(
+                        text: 'Delete Account',
+                        isLoading: state is DeleteAccountLoading,
+                        onPressed: state is DeleteAccountLoading
+                            ? () {}
+                            : () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => DeleteAccountDialog(
+                                    onDelete: () {
+                                      Navigator.pop(context);
+                                      context
+                                          .read<UpdateProfileCubit>()
+                                          .delete();
+                                    },
+                                  ),
+                                );
+                              },
+                      ),
+
+                      SizedBox(height: 19.h),
+
+                      /// update button
+                      AppButton(
+                        text: state is UpdateProfileLoading
+                            ? 'Loading...'
+                            : 'Update Data',
+
+                        onPressed: state is UpdateProfileLoading
+                            ? () {}
+                            : () {
+                                if (_formKey.currentState!.validate()) {
+                                  context
+                                      .read<UpdateProfileCubit>()
+                                      .updateProfileData(
+                                        name: _nameController.text.trim(),
+                                        phone: _phoneController.text.trim(),
+                                        avatarId: _selectedAvatarId,
+                                      );
+                                }
+                              },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
+          );
+        }
+
+        return const SizedBox();
       },
     );
   }
